@@ -17,12 +17,12 @@
 --     'installDir' \"$DESKTOP/Example1\"   -- The default installation directory
 --     'requestExecutionLevel' 'User'       -- Request application privileges for Windows Vista
 --     -- Pages to display
---     'page' 'Directory'                       -- Pick where to install
---     'page' 'InstFiles'                       -- Give a progress bar while installing
+--     'page' 'Directory'                   -- Pick where to install
+--     'page' 'InstFiles'                   -- Give a progress bar while installing
 --     -- Groups fo files to install
 --     'section' \"\" [] $ do
---         'setOutPath' \"$INSTDIR\"       -- Where to install files in this section
---         'file' [] \"Example1.hs\"         -- File to put into this section
+--         'setOutPath' \"$INSTDIR\"        -- Where to install files in this section
+--         'file' [] \"Example1.hs\"        -- File to put into this section
 -- @
 --
 --   The file @example1.nsi@ can now be processed with @makensis@ to produce the installer @example1.exe@.
