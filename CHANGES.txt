@@ -1,3 +1,4 @@
 Changelog for NSIS
 
+0.1
     Start of changelog
