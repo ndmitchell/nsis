@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+0.1.1
     Improved documentation
     Remove findOnce, you can use fileExists instead
 0.1
