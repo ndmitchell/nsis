@@ -30,7 +30,7 @@ module Development.NSIS
     -- ** File system manipulation
     FileHandle, fileOpen, fileWrite, fileClose, withFile', writeFile', writeFileLines,
     rmdir, delete, 
-    getFileTime, fileExists, findEach, findOnce,
+    getFileTime, fileExists, findEach,
     createDirectory, createShortcut,
     -- ** Registry manipulation
     readRegStr, deleteRegKey, writeRegStr, writeRegDWORD,

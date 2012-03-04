@@ -603,18 +603,6 @@ findEach spec act = do
     emit $ FindClose $ val hdl
 
 
--- return either "" for no patterns matched, or the first file
-findOnce :: Exp FilePath -> Exp String
-findOnce spec = do
-    -- can't use findEach + jump since then we leak a find handle
-    Value spec <- spec
-    hdl <- var
-    v <- var
-    emit $ FindFirst hdl v spec
-    emit $ FindClose $ val hdl
-    return $ Value $ val v
-
-
 infixr 5 &
 
 -- | Concatenate two strings, for example @\"$FOO\" & \"$BAR\"@ is equivalent
