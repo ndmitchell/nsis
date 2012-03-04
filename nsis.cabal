@@ -9,9 +9,13 @@ category:           Development
 author:             Neil Mitchell <ndmitchell@gmail.com>
 maintainer:         Neil Mitchell <ndmitchell@gmail.com>
 copyright:          Neil Mitchell 2012
-synopsis:           Build NSIS Installers
+synopsis:           DSL for producing Windows Installer using NSIS.
 description:
-    Helps writing NSIS Installers, see <http://nsis.sourceforge.net/>.
+    NSIS (Nullsoft Scriptable Install System, <http://nsis.sourceforge.net/>) is a tool that allows programmers
+    to create installers for Windows.
+    This library provides an alternative syntax for NSIS scripts, as an embedded Haskell language, removing much
+    of the hard work in developing an install script. Simple NSIS installers should look mostly the same, complex ones should
+    be significantly more maintainable.
 homepage:           http://community.haskell.org/~ndm/nsis/
 stability:          Beta
 

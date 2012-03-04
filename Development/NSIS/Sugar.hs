@@ -108,6 +108,7 @@ builtin = words $
     "TEMPLATES VIDEOS WINDIR"
 
 
+-- | Set all 'file' actions to automatically take 'NonFatal'.
 alwaysNonFatal :: Action () -> Action ()
 alwaysNonFatal act = do
     (xs, _) <- capture act
@@ -435,6 +436,8 @@ strTake n x = do Value n <- n; Value x <- x; v <- var; emit $ StrCpy v x n (lit 
 strDrop :: Exp Int -> Exp String -> Exp String
 strDrop n x = do Value n <- n; Value x <- x; v <- var; emit $ StrCpy v x (lit "") n; return $ Value $ val v
 
+-- | Gets the last write time of the file, you should only use the result to compare for equality
+--   with other results from 'getFileTime'. On failure the error flag is set.
 getFileTime :: Exp FilePath -> Exp String
 getFileTime x = do Value x <- x; v1 <- var; v2 <- var; emit $ GetFileTime x v1 v2; strConcat [return $ Value $ val v1, "#", return $ Value $ val v2]
 
@@ -577,6 +580,11 @@ onError act catch = do
     label end
 
 
+-- | Checks for existence of file(s) (which can be a wildcard, or a directory).
+--   If you want to check to see if a file is a directory, use @fileExists "DIRECTORY/*.*"@.
+--
+-- > iff_ (fileExists "$WINDIR/notepad.exe") $
+-- >     messageBox [MB_OK] "notepad is installed"
 fileExists :: Exp FilePath -> Exp Bool
 fileExists x = do
     v <- mutable_ false
@@ -590,7 +598,13 @@ fileExists x = do
     v
 
 
--- If you jump from inside the loop to outside then you may leak a find handle
+-- | Performs a search for filespec, running the action with each file found.
+--   If no files are found the error flag is set. Note that the filename output is without path.
+--
+-- > findEach "$INSTDIR/*.txt" $ \x ->
+-- >     detailPrint x
+--
+--   If you jump from inside the loop to after the loop then you may leak a search handle.
 findEach :: Exp FilePath -> (Exp FilePath -> Action ()) -> Action ()
 findEach spec act = do
     Value spec <- spec
@@ -611,7 +625,7 @@ infixr 5 &
 (&) a b = strConcat [a,b]
 
 
---  |Convert an 'Int' to a 'String'.
+-- | Convert an 'Int' to a 'String' by showing it.
 strShow :: Exp Int -> Exp String
 strShow = fmap (Value . fromValue)
 
@@ -621,6 +635,7 @@ strRead :: Exp String -> Exp Int
 strRead = fmap (Value . fromValue)
 
 
+-- | Show an alert, equivalent to @messageBox [MB_ICONEXCLAMATION]@.
 alert :: Exp String -> Action ()
 alert x = do
     _ <- messageBox [MB_ICONEXCLAMATION] x
@@ -672,7 +687,7 @@ writeUninstaller = emit1 WriteUninstaller
 
 -- | Set the icon used for the installer\/uninstaller.
 --
--- > installIcon "NSISDIR/Contrib/Graphics/Icons/modern-install.ico"
+-- > installIcon "$NSISDIR/Contrib/Graphics/Icons/modern-install.ico"
 installIcon, uninstallIcon :: Exp FilePath -> Action ()
 installIcon = emit1 InstallIcon
 uninstallIcon = emit1 UninstallIcon
@@ -750,6 +765,8 @@ writeRegStr k = emit3 $ WriteRegStr k
 writeRegDWORD :: HKEY -> Exp String -> Exp String -> Exp Int -> Action ()
 writeRegDWORD k = emit3 $ WriteRegDWORD k
 
+-- | While the action is executing, do not update the progress bar.
+--   Useful for functions which do a large amount of computation, or have loops.
 hideProgress :: Action a -> Action a
 hideProgress act = do
     fun <- fmap Fun unique
@@ -845,6 +862,12 @@ sectionGroup name as act = do
 uninstall :: Action () -> Action ()
 uninstall = section "Uninstall" []
 
+-- | Delete file (which can be a file or wildcard, but should be specified with a full path) from the target system.
+--   If 'RebootOK' is specified and the file cannot be deleted then the file is deleted when the system reboots --
+--   if the file will be deleted on a reboot, the reboot flag will be set. The error flag is set if files are found
+--   and cannot be deleted. The error flag is not set from trying to delete a file that does not exist.
+--
+-- > delete [] "$INSTDIR/somefile.dat"
 delete :: [Attrib] -> Exp FilePath -> Action ()
 delete as x = do
     Value x <- x
@@ -853,6 +876,36 @@ delete as x = do
         f c RebootOK = c{delRebootOK=True}
         f c x = error $ "Invalid attribute to delete: " ++ show x
 
+-- | Remove the specified directory (fully qualified path with no wildcards). Without 'Recursive',
+--   the directory will only be removed if it is completely empty. If 'Recursive' is specified, the
+--   directory will be removed recursively, so all directories and files in the specified directory
+--   will be removed. If 'RebootOK' is specified, any file or directory which could not have been
+--   removed during the process will be removed on reboot -- if any file or directory will be
+--   removed on a reboot, the reboot flag will be set.
+--   The error flag is set if any file or directory cannot be removed.
+--
+-- > rmdir [] "$INSTDIR"
+-- > rmdir [] "$INSTDIR/data"
+-- > rmdir [Recursive, RebootOK] "$INSTDIR"
+-- > rmdir [RebootOK] "$INSTDIR/DLLs"
+--
+--   Note that the current working directory can not be deleted. The current working directory is
+--   set by 'setOutPath'. For example, the following example will not delete the directory.
+--
+-- > setOutPath "$TEMP/dir"
+-- > rmdir [] "$TEMP/dir"
+--
+--   The next example will succeed in deleting the directory.
+--
+-- > setOutPath "$TEMP/dir"
+-- > setOutPath "$TEMP"
+-- > rmdir [] "$TEMP/dir"
+--
+--   Warning: using @rmdir [Recursive] "$INSTDIR"@ in 'uninstall' is not safe. Though it is unlikely,
+--   the user might select to install to the Program Files folder and so this command will wipe out
+--   the entire Program Files folder, including other programs that has nothing to do with the uninstaller.
+--   The user can also put other files but the program's files and would expect them to get deleted with
+--   the program. Solutions are available for easily uninstalling only files which were installed by the installer.
 rmdir :: [Attrib] -> Exp FilePath -> Action ()
 rmdir as x = do
     Value x <- x
@@ -862,6 +915,22 @@ rmdir as x = do
         f c Recursive = c{rmRecursive=True}
         f c x = error $ "Invalid attribute to rmdir: " ++ show x
 
+-- | Creates a shortcut file that links to a 'Traget' file, with optional 'Parameters'. The icon used for the shortcut
+--   is 'IconFile','IconIndex'. 'StartOptions' should be one of: SW_SHOWNORMAL, SW_SHOWMAXIMIZED, SW_SHOWMINIMIZED.
+--   'KeyboardShortcut' should be in the form of 'flag|c' where flag can be a combination (using |) of: ALT, CONTROL, EXT, or SHIFT.
+--   c is the character to use (a-z, A-Z, 0-9, F1-F24, etc). Note that no spaces are allowed in this string. A good example is
+--   \"ALT|CONTROL|F8\". @$OUTDIR@ is used for the working directory. You can change it by using 'setOutPath' before creating
+--   the Shortcut. 'Description' should be the description of the shortcut, or comment as it is called under XP.
+--   The error flag is set if the shortcut cannot be created (i.e. either of the paths (link or target) does not exist, or some other error).
+--
+-- > createDirectory "$SMPROGRAMS/My Company"
+-- > createShortcut "$SMPROGRAMS/My Company/My Program.lnk"
+-- >    [Target "$INSTDIR/My Program.exe"
+-- >    ,Parameter "some command line parameters"
+-- >    ,IconFile "$INSTDIR/My Program.exe", IconIndex 2
+-- >    ,StartOptions "SW_SHOWNORMAL"
+-- >    ,KeyboardShortcut "ALT|CONTROL|SHIFT|F5"
+-- >    ,Description "a description"]
 createShortcut :: Exp FilePath -> [Attrib] -> Action ()
 createShortcut name as = do Value name <- name; x <- foldM f def{scFile=name} as; emit $ CreateShortcut x
     where
