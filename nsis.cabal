@@ -1,0 +1,54 @@
+cabal-version:      >= 1.6
+build-type:         Simple
+name:               nsis
+version:            0.1
+-- license is GPL v2 only
+license:            GPL
+license-file:       LICENSE
+category:           Development
+author:             Neil Mitchell <ndmitchell@gmail.com>
+maintainer:         Neil Mitchell <ndmitchell@gmail.com>
+copyright:          Neil Mitchell 2012
+synopsis:           Build NSIS Installers
+description:
+    Helps writing NSIS Installers, see <http://nsis.sourceforge.net/>.
+homepage:           http://community.haskell.org/~ndm/nsis/
+stability:          Beta
+
+source-repository head
+    type:     darcs
+    location: http://community.haskell.org/~ndm/darcs/nsis/
+
+library
+    build-depends:
+        base == 4.*,
+        transformers == 0.2.*,
+        uniplate >= 1.5 && < 1.7
+
+    exposed-modules:
+        Development.NSIS
+    other-modules:
+        Development.NSIS.Library
+        Development.NSIS.Optimise
+        Development.NSIS.Show
+        Development.NSIS.Sugar
+        Development.NSIS.Type
+
+flag testprog
+    default: False
+    description: Build the test program
+
+
+executable nsis
+    main-is: Main.hs
+    if flag(testprog)
+        buildable: True
+    else
+        buildable: False
+    build-depends:
+        process
+
+    other-modules:
+        Examples.Example1
+        Examples.Example2
+        Examples.Primes

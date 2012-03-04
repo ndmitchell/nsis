@@ -1,0 +1,16 @@
+:set -package transformers
+:set -fwarn-unused-imports
+:load Main.hs Cortex.hs
+
+:{
+:def docs_ const $ return $ unlines
+        [":!cabal configure"
+        ,":!cabal haddock"]
+:}
+
+:{
+:def docs const $ return $ unlines
+        [":!cabal configure"
+        ,":!cabal haddock"
+        ,":!start dist\\doc\\html\\nsis\\Development-NSIS.html"]
+:}
