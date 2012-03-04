@@ -1,6 +1,6 @@
 :set -package transformers
 :set -fwarn-unused-imports
-:load Main.hs Cortex.hs
+:load Main.hs
 
 :{
 :def docs_ const $ return $ unlines

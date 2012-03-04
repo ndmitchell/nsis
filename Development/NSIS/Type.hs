@@ -116,6 +116,7 @@ data FileMode
     = ModeRead -- ^ Read a file.
     | ModeWrite -- All contents of file are destroyed.
     | ModeAppend -- ^ Opened for both read and write, contents preserved.
+     deriving (Data,Typeable,Bounded,Enum,Eq,Ord)
     
 instance Show FileMode where
     show ModeRead = "r"

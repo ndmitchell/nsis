@@ -326,11 +326,8 @@ constant name x = do x <- constant_ x; xx <- x; addScope name xx; return x
 constant_ :: Exp t -> Action (Exp t)
 constant_ x = do x <- x; return $ return x
 
--- | The 'Exp' language is call-by-name, meaning you must use share.
-
-XXX
-
-Evaluate an expression, ensuring its result is shared. If the expression has any side effects
+-- | The 'Exp' language is call-by-name, meaning you must use share to avoid evaluating an exression
+--   multiple times. Using 'share', if the expression has any side effects
 --   they will be run immediately, but not on subsequent uses. When defining functions operating on
 --   'Exp', if you use the same input expression twice, you should share it. For example:
 --
