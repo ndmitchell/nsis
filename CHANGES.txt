@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+0.1.2
     Allow transformers-0.3.0.0
 0.1.1
     Improved documentation
