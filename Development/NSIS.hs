@@ -43,6 +43,7 @@ module Development.NSIS
     (?), (%&&), (%||),
     Label, newLabel, label, goto,
     -- ** Expressions
+    str, int, bool,
     (%==), (%/=), (%<=), (%<), (%>=), (%>),
     true, false, not_,
     strRead, strShow,

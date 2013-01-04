@@ -423,6 +423,18 @@ true, false :: Exp Bool
 false = return $ Value []
 true = return $ Value [Literal "1"]
 
+-- | Lift a 'Bool' into an 'Exp'
+bool :: Bool -> Exp Bool
+bool x = if x then true else false
+
+-- | Lift a 'String' into an 'Exp'
+str :: String -> Exp String
+str = return . Value . lit
+
+-- | Lift an 'Int' into an 'Exp'
+int :: Int -> Exp Int
+int = return . Value . lit . show
+
 
 -- | Return the length of a string, @strLength \"test\" '%==' 4@.
 strLength :: Exp String -> Exp Int
