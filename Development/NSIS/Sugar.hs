@@ -13,6 +13,7 @@ import Data.Maybe
 import Data.Monoid
 import Data.String
 import Data.Typeable
+import Control.Applicative
 import Control.Monad
 import Control.Monad.Trans.State
 import Data.Generics.Uniplate.Data
