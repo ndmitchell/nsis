@@ -29,7 +29,7 @@ data S = S
 
 -- | Monad in which installers are defined. A useful command to start with is 'section'.
 newtype Action a = Action (State S a)
-    deriving (Functor, Monad)
+    deriving (Functor, Monad, Applicative)
 
 
 -- | A 'Value', only used by 'Exp', which can be produced using 'return'.
