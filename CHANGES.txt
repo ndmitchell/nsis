@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add Applicative instance for Action
     Add str, int and bool functions
 0.1.2
     Allow transformers-0.3.0.0
