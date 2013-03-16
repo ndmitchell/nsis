@@ -81,8 +81,8 @@ out (CreateShortcut AShortcut{..}) = return $ unwords $
 out (InstallIcon x) = ["!define MUI_ICON " ++ show x]
 out (UninstallIcon x) = ["!define MUI_UNICON " ++ show x]
 out (HeaderImage x) = "!define MUI_HEADERIMAGE" : ["!define MUI_HEADERIMAGE_BITMAP " ++ show x | Just x <- [x]]
-out (Page x) = ["!insertmacro MUI_PAGE_" ++ map toUpper (show x)]
-out (Unpage x) = ["!insertmacro MUI_UNPAGE_" ++ map toUpper (show x)]
+out (Page x) = ["!insertmacro MUI_PAGE_" ++ showPage x]
+out (Unpage x) = ["!insertmacro MUI_UNPAGE_" ++ showPage x]
 out Function{} = []
 out (Delete ADelete{..}) = [unwords $ "Delete" : ["/rebootok"|delRebootOK] ++ [show delFile]]
 out (RMDir ARMDir{..}) = [unwords $ "RMDir" : ["/r"|rmRecursive] ++ ["/rebootok"|rmRebootOK] ++ [show rmDir]]
@@ -91,6 +91,11 @@ out (MessageBox flags txt lbls) = [unwords $ "MessageBox" : intercalate "|" (map
 out (Goto x) = ["Goto " ++ show x | x /= Label 0]
 
 out x = [show x]
+
+
+showPage :: Page -> String
+showPage (License x) = "LICENSE \"" ++ x ++ "\""
+showPage x = map toUpper $ show x
 
 
 indent x = "  " ++ x

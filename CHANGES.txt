@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    #592, make the License page take a license file
 0.2
     Add Applicative instance for Action
     Add str, int and bool functions

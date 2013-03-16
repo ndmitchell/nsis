@@ -228,12 +228,12 @@ instance Default MessageBoxType where def = MB_ICONINFORMATION
 
 
 data Page
-    = License
+    = License FilePath
     | Components
     | Directory
     | InstFiles
     | Confirm
-     deriving (Show,Data,Typeable,Read,Bounded,Enum,Eq,Ord)
+     deriving (Show,Data,Typeable,Read,Eq,Ord)
 
 data Level = None | User | Highest | Admin
      deriving (Show,Data,Typeable,Read,Bounded,Enum,Eq,Ord)
