@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+0.2.1
     #592, make the License page take a license file
 0.2
     Add Applicative instance for Action
