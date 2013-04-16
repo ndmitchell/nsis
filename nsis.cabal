@@ -1,7 +1,7 @@
 cabal-version:      >= 1.6
 build-type:         Simple
 name:               nsis
-version:            0.2.1
+version:            0.2.2
 -- license is GPL v2 only
 license:            GPL
 license-file:       LICENSE
