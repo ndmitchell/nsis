@@ -2,7 +2,9 @@
 
 module Development.NSIS.Library where
 
+import Control.Monad
 import Development.NSIS.Sugar
+
 
 -- | Replace one string with another string, in a target string. As some examples:
 --
@@ -41,7 +43,8 @@ strUnlines = strConcat . map (& "\r\n")
 
 -- | Write a file comprising of a set of lines.
 writeFileLines :: Exp FilePath -> [Exp String] -> Action ()
-writeFileLines a b = writeFile' a $ strUnlines b
+writeFileLines a b = withFile' ModeWrite a $ \hdl ->
+    forM_ b $ \s -> fileWrite hdl $ s & "\r\n"
 
 
 infixr 3 %&&
