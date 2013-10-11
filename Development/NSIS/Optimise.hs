@@ -39,11 +39,11 @@ useLabel0 = map (descendBi useLabel0) . f
 
 -- Label whose next statement is a good, 
 elimLabeledGoto :: [NSIS] -> [NSIS]
-elimLabeledGoto x = transform f x
+elimLabeledGoto x = transformBi f x
     where
-        f (Labeled x:xs) = Labeled x : xs
-        f (x:xs) | null (children x :: [NSIS]) = transformBi moveBounce x : xs
-        f x = x
+        f (Labeled x) = Labeled x
+        f x | null (children x) = descendBi moveBounce x
+            | otherwise = x
 
         moveBounce x = fromMaybe x $ lookup x bounce
         bounce = flip concatMap (universe x) $ \x -> case x of
