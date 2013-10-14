@@ -19,8 +19,8 @@ homepage:           http://community.haskell.org/~ndm/nsis/
 stability:          Beta
 
 source-repository head
-    type:     darcs
-    location: http://community.haskell.org/~ndm/darcs/nsis/
+    type:     git
+    location: https://github.com/ndmitchell/nsis.git
 
 library
     build-depends:
