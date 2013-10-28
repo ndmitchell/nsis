@@ -14,8 +14,8 @@ showNSIS xs =
     ["Var _" ++ show v | v <- sort $ nub [i | Var i <- universeBi xs]] ++
     outs (filter isGlobal xs) ++
     ["!insertmacro MUI_LANGUAGE \"English\""] ++
-    concat [("Function " ++ show name) : map indent (outs body) ++ ["FunctionEnd"] | Function name body <- universeBi xs] ++
     outs (filter isSection xs) ++
+    concat [("Function " ++ show name) : map indent (outs body) ++ ["FunctionEnd"] | Function name body <- universeBi xs] ++
     ["Function .onInit" | not $ null inits] ++
     map indent (outs inits) ++
     ["FunctionEnd" | not $ null inits] ++
