@@ -865,6 +865,10 @@ hideProgress act = do
     emit $ Call fun
     return v
 
+-- | Sleep time in milliseconds
+sleep :: Exp Int -> Action ()
+sleep = emit1 Sleep
+
 -- | Create a function, useful for registering actions
 event :: String -> Action () -> Action ()
 event name act = do

@@ -58,7 +58,7 @@ module Development.NSIS
     -- ** Environment variables
     envVar,
     -- ** Process execution
-    exec, execWait, execShell,
+    exec, execWait, execShell, sleep,
     -- ** Plugins
     plugin, push, pop, exp_,
     addPluginDir,

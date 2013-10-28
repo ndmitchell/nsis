@@ -121,6 +121,7 @@ data NSIS
     | ShowUninstDetails Visibility
     | DetailPrint Val
     | Plugin String String [Val]
+    | Sleep Val
       deriving (Data,Typeable,Show)
 
 -- | Mode to use with 'Development.
