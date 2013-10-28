@@ -19,7 +19,7 @@ newtype Label = Label Int deriving (Data,Typeable,Eq)
 instance Show Label where show (Label i) = if i == 0 then "0" else "_lbl" ++ show i
 
 
-newtype Fun = Fun String deriving (Data,Typeable)
+newtype Fun = Fun String deriving (Data,Typeable,Eq,Ord)
 instance Show Fun where show (Fun i) = i
 
 newFun :: Int -> Fun

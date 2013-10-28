@@ -3,8 +3,10 @@
 module Development.NSIS.Show(showNSIS) where
 
 import Development.NSIS.Type
+import Control.Arrow
 import Data.Generics.Uniplate.Data
 import Data.Char
+import Data.Function
 import Data.List
 
 
@@ -12,12 +14,12 @@ showNSIS :: [NSIS] -> [String]
 showNSIS xs =
     ["!Include MUI2.nsh"] ++
     ["Var _" ++ show v | v <- sort $ nub [i | Var i <- universeBi xs]] ++
-    outs funs (filter isGlobal xs) ++
+    outs fs (filter isGlobal xs) ++
     ["!insertmacro MUI_LANGUAGE \"English\""] ++
-    outs funs (filter isSection xs) ++
-    concat [("Function " ++ show name) : map indent (outs funs body) ++ ["FunctionEnd"] | Function name body <- universeBi xs] ++
+    outs fs (filter isSection xs) ++
+    concat [("Function " ++ show name) : map indent (outs fs body) ++ ["FunctionEnd"] | (name,body) <- funs] ++
     ["Function .onInit" | not $ null inits] ++
-    map indent (outs funs inits) ++
+    map indent (outs fs inits) ++
     ["FunctionEnd" | not $ null inits] ++
     (if null descs then [] else
         ["!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN"] ++
@@ -25,7 +27,9 @@ showNSIS xs =
         ["!insertmacro MUI_FUNCTION_DESCRIPTION_END"])
     where descs = filter (not . null . snd) $ concatMap secDescs $ universeBi xs
           inits = filter (\x -> not (isSection x) && not (isGlobal x)) xs
-          funs = [name | Function name body <- universeBi xs]
+          fs = map fst funs
+          funs = map (fst . head &&& concatMap snd) $ groupBy ((==) `on` fst) $ sortBy (compare `on` fst) $
+                     [(name,body) | Function name body <- universeBi xs]
 
 
 secDescs :: NSIS -> [(SectionId, Val)]
