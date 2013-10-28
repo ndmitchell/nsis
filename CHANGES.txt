@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Switch to cabal test support, requires Cabal-1.10
     Add sectionGet and sectionSet
     Add all the binary operations as instances of Bit
     Add event and onSelChange

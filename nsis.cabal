@@ -38,19 +38,14 @@ library
         Development.NSIS.Sugar
         Development.NSIS.Type
 
-flag testprog
-    default: False
-    description: Build the test program
-
-
-executable nsis
+test-suite shake-test
     default-language: Haskell2010
+    type: exitcode-stdio-1.0
     main-is: Main.hs
-    if flag(testprog)
-        buildable: True
-    else
-        buildable: False
     build-depends:
+        base == 4.*,
+        transformers >= 0.2 && < 0.4,
+        uniplate >= 1.5 && < 1.7,
         process
 
     other-modules:
