@@ -65,7 +65,9 @@ module Development.NSIS
     installIcon, uninstallIcon, headerImage,
     installDirRegKey, allowRootDirInstall, caption, showInstDetails, showUninstDetails,
     -- ** Sections
-    SectionId, section, sectionGroup, newSectionId, sectionSetText, sectionGetText, uninstall, page, unpage,
+    SectionId, section, sectionGroup, newSectionId,
+    sectionSetText, sectionGetText, sectionSet, sectionGet,
+    uninstall, page, unpage,
     -- ** Events
     event, onSelChange,
     -- ** Section commands
@@ -73,7 +75,7 @@ module Development.NSIS
     hideProgress, detailPrint,
     -- * Settings
     Compressor(..), HKEY(..), MessageBoxType(..), Attrib(..), Page(..), Level(..), Visibility(..),
-    FileMode(..), ShowWindow(..)
+    FileMode(..), SectionFlag(..), ShowWindow(..)
     ) where
 
 import Development.NSIS.Sugar

@@ -64,6 +64,8 @@ data NSIS
     | IfErrors Label Label
     | SectionGetText SectionId Var
     | SectionSetText SectionId Val
+    | SectionGetFlags SectionId Var
+    | SectionSetFlags SectionId Val
     | IfFileExists Val Label Label
     | FindFirst Var Var Val
     | FindNext Val Var

@@ -2,7 +2,7 @@
 {-# LANGUAGE FlexibleInstances, GeneralizedNewtypeDeriving, DeriveDataTypeable #-}
 
 module Development.NSIS.Sugar(
-    Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Visibility(..), FileMode(..),
+    Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Visibility(..), FileMode(..), SectionFlag(..),
     ShowWindow(..),
     module Development.NSIS.Sugar, Label, SectionId
     ) where
@@ -13,7 +13,7 @@ import Data.List
 import Data.Maybe
 import Data.Monoid
 import Data.String
-import Data.Typeable
+import Data.Data
 import Data.Bits
 import Control.Applicative
 import Control.Monad
@@ -469,9 +469,6 @@ strDrop n x = do Value n <- n; Value x <- x; v <- var; emit $ StrCpy v x (lit ""
 getFileTime :: Exp FilePath -> Exp String
 getFileTime x = do Value x <- x; v1 <- var; v2 <- var; emit $ GetFileTime x v1 v2; strConcat [return $ Value $ val v1, "#", return $ Value $ val v2]
 
-sectionGetText :: SectionId -> Exp String
-sectionGetText x = do v <- var; emit $ SectionGetText x v; return $ Value $ val v
-
 readRegStr :: HKEY -> Exp String -> Exp String -> Exp String
 readRegStr k a b = do v <- var; emit2 (ReadRegStr v k) a b; return $ Value $ val v
 
@@ -774,6 +771,36 @@ execShell sw x = do
 
 sectionSetText :: SectionId -> Exp String -> Action ()
 sectionSetText x = emit1 $ SectionSetText x
+
+sectionGetText :: SectionId -> Exp String
+sectionGetText x = do v <- var; emit $ SectionGetText x v; return $ Value $ val v
+
+data SectionFlag
+    = SF_Selected
+    | SF_SectionGroup
+    | SF_SectionGroupEnd
+    | SF_Bold
+    | SF_ReadOnly
+    | SF_Expand
+    | SF_PartiallySelected
+      deriving (Show,Data,Typeable,Read,Bounded,Enum,Eq,Ord)
+
+sectionGet :: SectionId -> SectionFlag -> Exp Bool
+sectionGet sec flag = do
+    v <- var
+    emit $ SectionGetFlags sec v
+    let b = bit $ fromEnum flag :: Exp Int
+    b %== (return (Value $ val v) .&. b)
+
+sectionSet :: SectionId -> SectionFlag -> Exp Bool -> Action ()
+sectionSet sec flag set = do
+    v <- var
+    emit $ SectionGetFlags sec v
+    v <- return (return $ Value $ val v :: Exp Int)
+    iff set
+        (emit1 (SectionSetFlags sec) $ setBit   v (fromEnum flag))
+        (emit1 (SectionSetFlags sec) $ clearBit v (fromEnum flag))
+
 
 -- don't want to accidentally dupe the message box, so make it in Action Exp
 messageBox :: [MessageBoxType] -> Exp String -> Action (Exp String)
