@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add all the binary operations as instances of Bit
     Add event and onSelChange
     Add execWait and execShell
     Add envVar

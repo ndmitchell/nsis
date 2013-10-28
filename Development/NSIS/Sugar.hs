@@ -14,6 +14,7 @@ import Data.Maybe
 import Data.Monoid
 import Data.String
 import Data.Typeable
+import Data.Bits
 import Control.Applicative
 import Control.Monad
 import Control.Monad.Trans.State
@@ -225,6 +226,19 @@ instance Monoid (Exp String) where
             f (Literal x:Literal y:zs) = f $ Literal (x++y) : zs
             f (x:xs) = x : f xs
             f [] = []
+
+instance Bits (Exp Int) where
+    (.&.) = intOp "&"
+    (.|.) = intOp "|"
+    xor = intOp "^"
+    complement a = intOp "~" a 0
+    shiftL a b = intOp "<<" a (fromInteger $ toInteger b)
+    shiftR a b = intOp ">>" a (fromInteger $ toInteger b)
+    rotate = error "rotate is not available for Exp"
+    bitSize = error "bitSize is not available for Exp"
+    isSigned _ = True
+    testBit i = error "testBit is not available for Exp"
+    bit i = fromInteger $ toInteger (bit i :: Int)
 
 intOp :: String -> Exp Int -> Exp Int -> Exp Int
 intOp cmd x y = do Value x <- x; Value y <- y; v <- var; emit $ IntOp v x cmd y; return $ Value $ val v
