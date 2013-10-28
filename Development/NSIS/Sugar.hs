@@ -475,6 +475,8 @@ data Attrib
     = Solid
     | Final
     | RebootOK
+    | Silent
+    | FilesOnly
     | NonFatal
     | Recursive
     | Unselected
