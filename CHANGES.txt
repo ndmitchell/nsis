@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add event and onSelChange
     Add execWait and execShell
     Add envVar
     Add copyFiles function

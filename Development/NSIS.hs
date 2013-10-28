@@ -66,6 +66,8 @@ module Development.NSIS
     installDirRegKey, allowRootDirInstall, caption, showInstDetails, showUninstDetails,
     -- ** Sections
     SectionId, section, sectionGroup, newSectionId, sectionSetText, sectionGetText, uninstall, page, unpage,
+    -- ** Events
+    event, onSelChange,
     -- ** Section commands
     file, alwaysNonFatal, writeUninstaller, alert, setOutPath, messageBox, requestExecutionLevel,
     hideProgress, detailPrint,

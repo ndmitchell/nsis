@@ -803,6 +803,15 @@ hideProgress act = do
     emit $ Call fun
     return v
 
+-- | Create a function, useful for registering actions
+event :: String -> Action () -> Action ()
+event name act = do
+    (xs, _) <- capture act
+    emit $ Function (Fun name) xs
+
+onSelChange :: Action () -> Action ()
+onSelChange = event ".onSelChange"
+
 allowRootDirInstall :: Bool -> Action ()
 allowRootDirInstall = emit . AllowRootDirInstall
 
