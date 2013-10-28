@@ -55,6 +55,8 @@ module Development.NSIS
     createDirectory, createShortcut,
     -- ** Registry manipulation
     readRegStr, deleteRegKey, writeRegStr, writeRegDWORD,
+    -- ** Environment variables
+    envVar,
     -- ** Process execution
     exec,
     -- * Installer

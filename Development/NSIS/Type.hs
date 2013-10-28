@@ -98,6 +98,7 @@ data NSIS
     | WriteRegDWORD HKEY Val Val Val
     | ReadRegStr Var HKEY Val Val
     | DeleteRegKey HKEY Val
+    | ReadEnvStr Var Val
     | Exec Val
     | ClearErrors
     | Delete ADelete
