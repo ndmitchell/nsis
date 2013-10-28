@@ -100,6 +100,8 @@ data NSIS
     | DeleteRegKey HKEY Val
     | ReadEnvStr Var Val
     | Exec Val
+    | ExecWait Val
+    | ExecShell AExecShell
     | ClearErrors
     | Delete ADelete
     | RMDir ARMDir
@@ -194,6 +196,13 @@ data ADelete = ADelete
 
 instance Default ADelete where def = ADelete def False
 
+data AExecShell = AExecShell
+    {esCommand :: Val
+    ,esShow :: ShowWindow
+    } deriving (Data,Typeable,Show)
+
+instance Default AExecShell where def = AExecShell def def
+
 data ACopyFiles = ACopyFiles
     {cpFrom :: Val
     ,cpTo :: Val
@@ -202,6 +211,16 @@ data ACopyFiles = ACopyFiles
     } deriving (Data,Typeable,Show)
 
 instance Default ACopyFiles where def = ACopyFiles def def False False
+
+data ShowWindow
+    = SW_SHOWDEFAULT
+    | SW_SHOWNORMAL
+    | SW_SHOWMAXIMIZED
+    | SW_SHOWMINIMIZED
+    | SW_HIDE
+     deriving (Show,Data,Typeable,Read,Bounded,Enum,Eq,Ord)
+
+instance Default ShowWindow where def = SW_SHOWDEFAULT
 
 data HKEY
     = HKCR  | HKEY_CLASSES_ROOT

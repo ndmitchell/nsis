@@ -90,6 +90,7 @@ out (CopyFiles ACopyFiles{..}) = [unwords $ "CopyFiles" : ["/silent"|cpSilent] +
 out (MessageBox flags txt lbls) = [unwords $ "MessageBox" : intercalate "|" (map show flags) : show txt :
     ["ID" ++ a ++ " " ++ show b | (a,b) <- lbls]]
 out (Goto x) = ["Goto " ++ show x | x /= Label 0]
+out (ExecShell AExecShell{..}) = [unwords ["ExecShell","\"\"",show esCommand,show esShow]]
 
 out x = [show x]
 

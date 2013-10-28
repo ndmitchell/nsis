@@ -3,6 +3,7 @@
 
 module Development.NSIS.Sugar(
     Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Visibility(..), FileMode(..),
+    ShowWindow(..),
     module Development.NSIS.Sugar, Label, SectionId
     ) where
 
@@ -745,6 +746,15 @@ installDirRegKey k = emit2 $ InstallDirRegKey k
 -- > exec "\"$INSTDIR/someprogram.exe\" some parameters"
 exec :: Exp String -> Action ()
 exec = emit1 Exec
+
+execWait :: Exp String -> Action ()
+execWait = emit1 ExecWait
+
+execShell :: [ShowWindow] -> Exp String -> Action ()
+execShell sw x = do
+    Value x <- x
+    let d = def{esCommand=x}
+    emit $ ExecShell $ if null sw then d else d{esShow=last sw}
 
 sectionSetText :: SectionId -> Exp String -> Action ()
 sectionSetText x = emit1 $ SectionSetText x

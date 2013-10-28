@@ -58,7 +58,7 @@ module Development.NSIS
     -- ** Environment variables
     envVar,
     -- ** Process execution
-    exec,
+    exec, execWait, execShell,
     -- * Installer
     -- ** Global installer options
     name, outFile, installDir, setCompressor,
