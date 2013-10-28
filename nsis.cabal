@@ -55,3 +55,4 @@ test-suite shake-test
         Examples.Example1
         Examples.Example2
         Examples.Primes
+        Examples.Taskbar
