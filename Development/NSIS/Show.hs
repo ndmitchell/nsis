@@ -83,7 +83,11 @@ out fs (CreateShortcut AShortcut{..}) = return $ unwords $
 out fs (InstallIcon x) = ["!define MUI_ICON " ++ show x]
 out fs (UninstallIcon x) = ["!define MUI_UNICON " ++ show x]
 out fs (HeaderImage x) = "!define MUI_HEADERIMAGE" : ["!define MUI_HEADERIMAGE_BITMAP " ++ show x | Just x <- [x]]
-out fs (Page x) = ["!insertmacro MUI_PAGE_" ++ showPage x]
+out fs (Page x) = let y = showPageAtom x in
+    ["!define MUI_PAGE_CUSTOMFUNCTION_PRE Pre" ++ y | "Pre" ++ y `elem` map show fs] ++
+    ["!define MUI_PAGE_CUSTOMFUNCTION_SHOW Show" ++ y | "Show" ++ y `elem` map show fs] ++
+    ["!define MUI_PAGE_CUSTOMFUNCTION_LEAVE Leave" ++ y | "Leave" ++ y `elem` map show fs] ++
+    ["!insertmacro MUI_PAGE_" ++ showPage x]
 out fs (Unpage x) = ["!insertmacro MUI_UNPAGE_" ++ showPage x]
 out fs Function{} = []
 out fs (Delete ADelete{..}) = [unwords $ "Delete" : ["/rebootok"|delRebootOK] ++ [show delFile]]
@@ -103,6 +107,10 @@ out fs x = [show x]
 showPage :: Page -> String
 showPage (License x) = "LICENSE \"" ++ x ++ "\""
 showPage x = map toUpper $ show x
+
+showPageAtom :: Page -> String
+showPageAtom (License x) = "License"
+showPageAtom x = show x
 
 
 indent x = "  " ++ x

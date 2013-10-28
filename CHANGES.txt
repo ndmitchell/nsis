@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Hook up Show/Pre/Leave functions for pages
     Add sleep
     Add a wrapper round the Base64 plugin
     Add support for plugins
