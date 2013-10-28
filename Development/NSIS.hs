@@ -71,7 +71,7 @@ module Development.NSIS
     hideProgress, detailPrint,
     -- * Settings
     Compressor(..), HKEY(..), MessageBoxType(..), Attrib(..), Page(..), Level(..), Visibility(..),
-    FileMode(..)
+    FileMode(..), ShowWindow(..)
     ) where
 
 import Development.NSIS.Sugar
