@@ -451,6 +451,27 @@ str = return . Value . lit
 int :: Int -> Exp Int
 int = return . Value . lit . show
 
+-- | Erase the type of an Exp, only useful with 'plugin'.
+exp_ :: Exp a -> Exp ()
+exp_ = fmap (Value . fromValue)
+
+-- | Pop a value off the stack, will set an error if there is nothing on the stack.
+--   Only useful with 'plugin'.
+pop :: Exp String
+pop = do v <- var; emit $ Pop v; return $ Value $ val v
+
+-- | Push a value onto the stack. Only useful with 'plugin'.
+push :: Exp a -> Action ()
+push a = do Value a <- a; emit $ Push a
+
+-- | Call a plugin. If the arguments are of different types use 'exp_'.
+plugin :: String -> String -> [Exp a] -> Action ()
+plugin dll name args = do args <- mapM (fmap fromValue) args; emit $ Plugin dll name args
+
+-- | Add a plugin directory
+addPluginDir :: Exp String -> Action ()
+addPluginDir a = do Value a <- a; emit $ AddPluginDir a
+
 
 -- | Return the length of a string, @strLength \"test\" '%==' 4@.
 strLength :: Exp String -> Exp Int

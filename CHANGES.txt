@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add support for plugins
     Switch to cabal test support, requires Cabal-1.10
     Add sectionGet and sectionSet
     Add all the binary operations as instances of Bit

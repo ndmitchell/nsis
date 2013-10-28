@@ -45,6 +45,7 @@ isGlobal x = case x of
     Page{} -> True
     Unpage{} -> True
     RequestExecutionLevel{} -> True
+    AddPluginDir{} -> True
     InstallDirRegKey{} -> True
     AllowRootDirInstall{} -> True
     ShowInstDetails{} -> True
@@ -92,6 +93,8 @@ out (MessageBox flags txt lbls) = [unwords $ "MessageBox" : intercalate "|" (map
 out (Goto x) = ["Goto " ++ show x | x /= Label 0]
 out (IntOp a b "~" _) = [unwords $ "IntOp" : [show a, show b, "~"]] -- the only unary IntOp
 out (ExecShell AExecShell{..}) = [unwords ["ExecShell","\"\"",show esCommand,show esShow]]
+out (Plugin a b cs) = [unwords $ (a ++ "::" ++ b) : map show cs]
+out (AddPluginDir a) = [unwords ["!addplugindir",show a]]
 
 out x = [show x]
 

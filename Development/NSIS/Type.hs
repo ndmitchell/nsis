@@ -70,6 +70,8 @@ data NSIS
     | FindFirst Var Var Val
     | FindNext Val Var
     | FindClose Val
+    | Push Val
+    | Pop Var
 
       -- blocks
     | Section ASection [NSIS]
@@ -111,12 +113,14 @@ data NSIS
     | RMDir ARMDir
     | CopyFiles ACopyFiles
     | RequestExecutionLevel Level
+    | AddPluginDir Val
     | InstallDirRegKey HKEY Val Val
     | AllowRootDirInstall Bool
     | Caption Val
     | ShowInstDetails Visibility
     | ShowUninstDetails Visibility
     | DetailPrint Val
+    | Plugin String String [Val]
       deriving (Data,Typeable,Show)
 
 -- | Mode to use with 'Development.

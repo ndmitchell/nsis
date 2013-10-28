@@ -59,6 +59,9 @@ module Development.NSIS
     envVar,
     -- ** Process execution
     exec, execWait, execShell,
+    -- ** Plugins
+    plugin, push, pop, exp_,
+    addPluginDir,
     -- * Installer
     -- ** Global installer options
     name, outFile, installDir, setCompressor,
