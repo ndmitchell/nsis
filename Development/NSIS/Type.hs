@@ -19,9 +19,11 @@ newtype Label = Label Int deriving (Data,Typeable,Eq)
 instance Show Label where show (Label i) = if i == 0 then "0" else "_lbl" ++ show i
 
 
-newtype Fun = Fun Int deriving (Data,Typeable)
-instance Show Fun where show (Fun i) = "_fun" ++ show i
+newtype Fun = Fun String deriving (Data,Typeable)
+instance Show Fun where show (Fun i) = i
 
+newFun :: Int -> Fun
+newFun i = Fun $ "_fun" ++ show i
 
 newtype SectionId = SectionId Int deriving (Data,Typeable)
 instance Show SectionId where show (SectionId i) = "${_sec" ++ show i ++ "}"

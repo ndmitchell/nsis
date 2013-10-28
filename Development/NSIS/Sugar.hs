@@ -797,7 +797,7 @@ writeRegDWORD k = emit3 $ WriteRegDWORD k
 --   Useful for functions which do a large amount of computation, or have loops.
 hideProgress :: Action a -> Action a
 hideProgress act = do
-    fun <- fmap Fun unique
+    fun <- fmap newFun unique
     (xs, v) <- capture act
     emit $ Function fun xs
     emit $ Call fun
