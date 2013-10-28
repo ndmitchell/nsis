@@ -102,6 +102,7 @@ data NSIS
     | ClearErrors
     | Delete ADelete
     | RMDir ARMDir
+    | CopyFiles ACopyFiles
     | RequestExecutionLevel Level
     | InstallDirRegKey HKEY Val Val
     | AllowRootDirInstall Bool
@@ -191,6 +192,15 @@ data ADelete = ADelete
     } deriving (Data,Typeable,Show)
 
 instance Default ADelete where def = ADelete def False
+
+data ACopyFiles = ACopyFiles
+    {cpFrom :: Val
+    ,cpTo :: Val
+    ,cpSilent :: Bool
+    ,cpFilesOnly :: Bool
+    } deriving (Data,Typeable,Show)
+
+instance Default ACopyFiles where def = ACopyFiles def def False False
 
 data HKEY
     = HKCR  | HKEY_CLASSES_ROOT

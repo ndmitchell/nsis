@@ -50,7 +50,7 @@ module Development.NSIS
     (&), strConcat, strLength, strTake, strDrop, strReplace, strIsPrefixOf, strUnlines,
     -- ** File system manipulation
     FileHandle, fileOpen, fileWrite, fileClose, withFile', writeFile', writeFileLines,
-    rmdir, delete, 
+    rmdir, delete, copyFiles,
     getFileTime, fileExists, findEach,
     createDirectory, createShortcut,
     -- ** Registry manipulation

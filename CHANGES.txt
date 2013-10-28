@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add copyFiles function
 0.2.2
     Change writeFileLines' to not build up a large buffer
 0.2.1

@@ -86,6 +86,7 @@ out (Unpage x) = ["!insertmacro MUI_UNPAGE_" ++ showPage x]
 out Function{} = []
 out (Delete ADelete{..}) = [unwords $ "Delete" : ["/rebootok"|delRebootOK] ++ [show delFile]]
 out (RMDir ARMDir{..}) = [unwords $ "RMDir" : ["/r"|rmRecursive] ++ ["/rebootok"|rmRebootOK] ++ [show rmDir]]
+out (CopyFiles ACopyFiles{..}) = [unwords $ "CopyFiles" : ["/silent"|cpSilent] ++ ["/filesonly"|cpFilesOnly] ++ [show cpFrom, show cpTo]]
 out (MessageBox flags txt lbls) = [unwords $ "MessageBox" : intercalate "|" (map show flags) : show txt :
     ["ID" ++ a ++ " " ++ show b | (a,b) <- lbls]]
 out (Goto x) = ["Goto " ++ show x | x /= Label 0]

@@ -928,6 +928,17 @@ rmdir as x = do
         f c Recursive = c{rmRecursive=True}
         f c x = error $ "Invalid attribute to rmdir: " ++ show x
 
+-- | Both file paths are on the installing system. Do not use relative paths.
+copyFiles :: [Attrib] -> Exp FilePath -> Exp FilePath -> Action ()
+copyFiles as from to = do
+    Value from <- from
+    Value to <- to
+    emit $ CopyFiles $ foldl f def{cpFrom=from, cpTo=to} as
+    where
+        f c Silent = c{cpSilent=True}
+        f c FilesOnly = c{cpFilesOnly=True}
+        f c x = error $ "Invalid attribute to copyFiles: " ++ show x
+
 -- | Creates a shortcut file that links to a 'Traget' file, with optional 'Parameters'. The icon used for the shortcut
 --   is 'IconFile','IconIndex'. 'StartOptions' should be one of: SW_SHOWNORMAL, SW_SHOWMAXIMIZED, SW_SHOWMINIMIZED.
 --   'KeyboardShortcut' should be in the form of 'flag|c' where flag can be a combination (using |) of: ALT, CONTROL, EXT, or SHIFT.
