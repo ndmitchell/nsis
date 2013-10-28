@@ -10,12 +10,13 @@ import System.Exit
 import System.Info
 
 import Development.NSIS
+import Examples.Base64
 import Examples.Example1
 import Examples.Example2
 import Examples.Primes
 
 
-examples = let (*) = (,) in ["example1" * example1, "example2" * example2, "primes" * primes]
+examples = let (*) = (,) in ["base64" * base64, "example1" * example1, "example2" * example2, "primes" * primes]
 
 
 main = do

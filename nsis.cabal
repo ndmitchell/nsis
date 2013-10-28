@@ -50,6 +50,7 @@ test-suite shake-test
         process
 
     other-modules:
+        Examples.Base64
         Examples.Example1
         Examples.Example2
         Examples.Primes
