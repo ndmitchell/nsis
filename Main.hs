@@ -7,6 +7,7 @@ import Data.Maybe
 import System.Cmd
 import System.Environment
 import System.Exit
+import System.Info
 
 import Development.NSIS
 import Examples.Example1
@@ -20,16 +21,32 @@ examples = let (*) = (,) in ["example1" * example1, "example2" * example2, "prim
 main = do
     args <- getArgs
     let (flags,names) = partition ("-" `isPrefixOf`) args
-    names <- return $ concatMap (\x -> if x == "all" then map fst examples else [x]) names
-    if null names then
-        putStrLn $ "Type the name of an example: " ++ unwords (map fst examples)
-     else do
-        forM_ names $ \name -> do
-            let script = fromMaybe (error $ "Unknown example: " ++ name) $ lookup name examples
-            unless ("--nowrite" `elem` flags) $ writeFile (name ++ ".nsi") $ nsis script
-            unless ("--nobuild" `elem` flags) $ do
-                r <- system $ "\"C:/Program Files/NSIS/makensis.exe\" " ++ name ++ ".nsi"
+    when ("--help" `elem` flags) $ do
+        putStr $ unlines
+            ["nsis-test [FLAGS] [EXAMPLES]"
+            ,"Examples:"
+            ,"  " ++ unwords (map fst examples)
+            ,"Flags:"
+            ,"  --help     Show this message"
+            ,"  --nowrite  Don't write out the scripts"
+            ,"  --nobuild  Don't build"
+            ,"  --run      Run the result"
+            ]
+        exitSuccess
+    when (null args) $ do
+        putStrLn "*****************************************************************"
+        putStrLn "** Running nsis test suite, run with '--help' to see arguments **"
+        putStrLn "*****************************************************************"
+    names <- return $ if null names then map fst examples else names
+    forM_ names $ \name -> do
+        let script = fromMaybe (error $ "Unknown example: " ++ name) $ lookup name examples
+        unless ("--nowrite" `elem` flags) $ writeFile (name ++ ".nsi") $ nsis script
+        unless ("--nobuild" `elem` flags) $
+            if os == "mingw32" then do
+                r <- system $ "makensis " ++ name ++ ".nsi"
                 when (r /= ExitSuccess) $ error "NSIS FAILED"
-            when ("--run" `elem` flags) $ do
-                system $ name ++ ".exe"
-                return ()
+            else
+                putStrLn "Not building because not on Windows"
+        when ("--run" `elem` flags) $ do
+            system $ name ++ ".exe"
+            return ()
