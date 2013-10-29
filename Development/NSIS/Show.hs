@@ -18,9 +18,6 @@ showNSIS xs =
     ["!insertmacro MUI_LANGUAGE \"English\""] ++
     outs fs (filter isSection xs) ++
     concat [("Function " ++ show name) : map indent (outs fs body) ++ ["FunctionEnd"] | (name,body) <- funs] ++
-    ["Function .onInit" | not $ null inits] ++
-    map indent (outs fs inits) ++
-    ["FunctionEnd" | not $ null inits] ++
     (if null descs then [] else
         ["!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN"] ++
         map indent ["!insertmacro MUI_DESCRIPTION_TEXT " ++ show i ++ " " ++ show d | (i,d) <- descs] ++
@@ -29,7 +26,7 @@ showNSIS xs =
           inits = filter (\x -> not (isSection x) && not (isGlobal x)) xs
           fs = map fst funs
           funs = map (fst . head &&& concatMap snd) $ groupBy ((==) `on` fst) $ sortBy (compare `on` fst) $
-                     [(name,body) | Function name body <- universeBi xs]
+                     [(Fun ".onInit",inits) | not $ null inits] ++ [(name,body) | Function name body <- universeBi xs]
 
 
 secDescs :: NSIS -> [(SectionId, Val)]
