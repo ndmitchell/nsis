@@ -84,7 +84,7 @@ out fs (CreateShortcut AShortcut{..}) = return $ unwords $
 out fs (InstallIcon x) = ["!define MUI_ICON " ++ show x]
 out fs (UninstallIcon x) = ["!define MUI_UNICON " ++ show x]
 out fs (HeaderImage x) = "!define MUI_HEADERIMAGE" : ["!define MUI_HEADERIMAGE_BITMAP " ++ show x | Just x <- [x]]
-out fs (Page x) = let y = showPageAtom x in
+out fs (Page x) = let y = showPageCtor x in
     ["!define MUI_PAGE_CUSTOMFUNCTION_PRE Pre" ++ y | "Pre" ++ y `elem` map show fs] ++
     ["!define MUI_PAGE_CUSTOMFUNCTION_SHOW Show" ++ y | "Show" ++ y `elem` map show fs] ++
     ["!define MUI_PAGE_CUSTOMFUNCTION_LEAVE Leave" ++ y | "Leave" ++ y `elem` map show fs] ++
@@ -108,10 +108,5 @@ out fs x = [show x]
 showPage :: Page -> String
 showPage (License x) = "LICENSE \"" ++ x ++ "\""
 showPage x = map toUpper $ show x
-
-showPageAtom :: Page -> String
-showPageAtom (License x) = "License"
-showPageAtom x = show x
-
 
 indent x = "  " ++ x

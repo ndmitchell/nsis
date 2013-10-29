@@ -274,6 +274,10 @@ data Page
     | Confirm
      deriving (Show,Data,Typeable,Read,Eq,Ord)
 
+showPageCtor :: Page -> String
+showPageCtor (License _) = "License"
+showPageCtor x = show x
+
 data Level = None | User | Highest | Admin
      deriving (Show,Data,Typeable,Read,Bounded,Enum,Eq,Ord)
 
