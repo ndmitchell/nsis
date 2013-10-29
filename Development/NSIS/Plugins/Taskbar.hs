@@ -7,4 +7,4 @@ import Development.NSIS
 
 -- | Enable Windows 7 taskbar plugin, called anywhere.
 taskbar :: Action ()
-taskbar = event "ShowInstFiles" $ plugin "w7tbp" "Start" []
+taskbar = onPageShow InstFiles $ plugin "w7tbp" "Start" []
