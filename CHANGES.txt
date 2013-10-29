@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add explicit page events
     #1, add a Win7 taskbar progress plugin module
     Collapse duplicate events into one
     Hook up Show/Pre/Leave functions for pages

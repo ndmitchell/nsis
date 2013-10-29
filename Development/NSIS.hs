@@ -73,6 +73,7 @@ module Development.NSIS
     uninstall, page, unpage,
     -- ** Events
     event, onSelChange,
+    onPageShow, onPagePre, onPageLeave,
     -- ** Section commands
     file, alwaysNonFatal, writeUninstaller, alert, setOutPath, messageBox, requestExecutionLevel,
     hideProgress, detailPrint,

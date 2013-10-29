@@ -878,6 +878,12 @@ event name act = do
 onSelChange :: Action () -> Action ()
 onSelChange = event ".onSelChange"
 
+onPageShow, onPagePre, onPageLeave :: Page -> Action () -> Action ()
+-- these names are special and bound by Show
+onPageShow  p = event $ "Show" ++ showPageCtor p
+onPagePre   p = event $ "Pre" ++ showPageCtor p
+onPageLeave p = event $ "Show" ++ showPageCtor p
+
 allowRootDirInstall :: Bool -> Action ()
 allowRootDirInstall = emit . AllowRootDirInstall
 
