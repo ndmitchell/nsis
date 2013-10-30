@@ -16,6 +16,11 @@ showNSIS xs =
     ["Var _" ++ show v | v <- sort $ nub [i | Var i <- universeBi xs]] ++
     outs fs (filter isGlobal xs) ++
     ["!insertmacro MUI_LANGUAGE \"English\""] ++
+    (if null plugins then [] else
+        ["Function NSIS_UnusedPluginPreload"
+        ,"  # Put all plugins are at the start of the archive, ensuring fast extraction (esp. LZMA solid)"] ++
+        map indent plugins ++
+        ["FunctionEnd"]) ++
     outs fs (filter isSection xs) ++
     concat [("Function " ++ show name) : map indent (outs fs body) ++ ["FunctionEnd"] | (name,body) <- funs] ++
     (if null descs then [] else
@@ -27,6 +32,7 @@ showNSIS xs =
           fs = map fst funs
           funs = map (fst . head &&& concatMap snd) $ groupBy ((==) `on` fst) $ sortBy (compare `on` fst) $
                      [(Fun ".onInit",inits) | not $ null inits] ++ [(name,body) | Function name body <- universeBi xs]
+          plugins = sort $ nub [a ++ "::" ++ b | Plugin a b _ <- universeBi xs]
 
 
 secDescs :: NSIS -> [(SectionId, Val)]
