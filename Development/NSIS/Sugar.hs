@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings, EmptyDataDecls, ScopedTypeVariables, TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances, GeneralizedNewtypeDeriving, DeriveDataTypeable #-}
+{-# OPTIONS_GHC -fno-warn-missing-methods #-} -- Bits.popCount only introduced in 7.6
 
 module Development.NSIS.Sugar(
     Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Visibility(..), FileMode(..), SectionFlag(..),
