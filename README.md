@@ -1,6 +1,6 @@
 # NSIS Manual
 
-This library makes it easier to write NSIS Windows Installers. You should use this library if:
+This library makes it easier to write [NSIS Windows Installers](http://nsis.sourceforge.net/). You should use this library if:
 
 * You want to write a Windows Installer, and have picked NSIS (which is a common choice, and in my opinion, one of the best installer generators for Windows).
 
@@ -26,7 +26,7 @@ Using this library we can write:
 
 ## A Simple Example
 
-The [Examples](http://github.com/ndmitchell/nsis/Examples) directory contains a number of simple NSIS scripts, mostly ported directly from the NSIS examples. As a simple example:
+The [Examples](https://github.com/ndmitchell/nsis/tree/master/Examples) directory contains a number of simple NSIS scripts, mostly ported directly from the NSIS examples. As a simple example:
 
     import Development.NSIS
 
