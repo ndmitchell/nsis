@@ -332,8 +332,8 @@ mutable_ x = do
 --   To introduce a new scope, see 'scope'.
 --
 -- @
--- 'constant' "HELLO" "Hello World"
--- 'alert' "$HELLO!"
+-- 'constant' \"HELLO\" \"Hello World\"
+-- 'alert' \"$HELLO!\"
 -- @
 constant :: Typeable t => String -> Exp t -> Action (Exp t)
 constant name x = do x <- constant_ x; xx <- x; addScope name xx; return x
