@@ -464,7 +464,15 @@ pop = do v <- var; emit $ Pop v; return $ Value $ val v
 push :: Exp a -> Action ()
 push a = do Value a <- a; emit $ Push a
 
--- | Call a plugin. If the arguments are of different types use 'exp_'.
+-- | Call a plugin. If the arguments are of different types use 'exp_'. As an example:
+--
+-- @
+-- encrypt x = 'share' x $ \\x -> do
+--     'plugin' \"Base64\" \"Encrypt\" ['exp_' x, 'exp_' $ 'strLength' x]
+-- @
+--
+--   The only thing to be careful about is that we use the @x@ parameter twice, so should 'share'
+--   it to ensure it is only evaluated once.
 plugin :: String -> String -> [Exp a] -> Action ()
 plugin dll name args = do args <- mapM (fmap fromValue) args; emit $ Plugin dll name args
 
