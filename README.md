@@ -26,7 +26,7 @@ Using this library we can write:
 
 ## A Simple Example
 
-The [Examples](https://github.com/ndmitchell/nsis/tree/master/Examples) directory contains a number of simple NSIS scripts, mostly ported directly from the NSIS examples. As a simple example:
+The [Examples](https://github.com/ndmitchell/nsis/tree/master/Examples) directory contains a number of simple NSIS scripts, several ported from the NSIS distributed examples. As a simple example:
 
     import Development.NSIS
 
@@ -43,7 +43,7 @@ The [Examples](https://github.com/ndmitchell/nsis/tree/master/Examples) director
              setOutPath "$INSTDIR"        -- Where to install files in this section
              file [] "Example1.hs"        -- File to put into this section
 
-The file `example1.nsi` can now be processed with `makensis` to produce the installer `example1.exe`.
+Running this code will generate a file `example1.nsi` that can be processed with `makensis` to produce the installer `example1.exe`. Documentation on each of the functions [is available here](http://hackage.haskell.org/package/nsis/docs/Development-NSIS.html).
 
 ## Contributions welcome
 
