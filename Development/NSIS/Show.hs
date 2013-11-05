@@ -94,6 +94,7 @@ out fs (Page x) = let y = showPageCtor x in
     ["!define MUI_PAGE_CUSTOMFUNCTION_PRE Pre" ++ y | "Pre" ++ y `elem` map show fs] ++
     ["!define MUI_PAGE_CUSTOMFUNCTION_SHOW Show" ++ y | "Show" ++ y `elem` map show fs] ++
     ["!define MUI_PAGE_CUSTOMFUNCTION_LEAVE Leave" ++ y | "Leave" ++ y `elem` map show fs] ++
+    concat [showFinish x | Finish x <- [x]] ++
     ["!insertmacro MUI_PAGE_" ++ showPage x]
 out fs (Unpage x) = ["!insertmacro MUI_UNPAGE_" ++ showPage x]
 out fs Function{} = []
@@ -113,6 +114,19 @@ out fs x = [show x]
 
 showPage :: Page -> String
 showPage (License x) = "LICENSE \"" ++ x ++ "\""
-showPage x = map toUpper $ show x
+showPage x = map toUpper $ showPageCtor x
+
+showFinish :: FinishOptions -> [String]
+showFinish FinishOptions{..} =
+    ["!define MUI_FINISHPAGE_RUN " ++ show finRun | finRun /= def] ++
+    ["!define MUI_FINISHPAGE_RUN_TEXT " ++ show finRunText | finRunText /= def] ++
+    ["!define MUI_FINISHPAGE_RUN_PARAMETERS " ++ show finRunParamters | finRunParamters /= def] ++
+    ["!define MUI_FINISHPAGE_RUN_NOTCHECKED" | not finRunChecked && finRun /= def] ++
+    ["!define MUI_FINISHPAGE_SHOWREADME " ++ show finReadme | finReadme /= def] ++
+    ["!define MUI_FINISHPAGE_SHOWREADME_TEXT " ++ show finReadmeText | finReadmeText /= def] ++
+    ["!define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED" | not finReadmeChecked && finReadme /= def] ++
+    ["!define MUI_FINISHPAGE_LINK_LOCATION " ++ show finLink | finLink /= def] ++
+    ["!define MUI_FINISHPAGE_LINK " ++ show finLinkText | finLinkText /= def]
+
 
 indent x = "  " ++ x

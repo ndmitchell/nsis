@@ -70,7 +70,7 @@ module Development.NSIS
     -- ** Sections
     SectionId, section, sectionGroup, newSectionId,
     sectionSetText, sectionGetText, sectionSet, sectionGet,
-    uninstall, page, unpage,
+    uninstall, page, unpage, finishOptions,
     -- ** Events
     event, onSelChange,
     onPageShow, onPagePre, onPageLeave,
@@ -79,7 +79,7 @@ module Development.NSIS
     hideProgress, detailPrint,
     -- * Settings
     Compressor(..), HKEY(..), MessageBoxType(..), Attrib(..), Page(..), Level(..), Visibility(..),
-    FileMode(..), SectionFlag(..), ShowWindow(..)
+    FileMode(..), SectionFlag(..), ShowWindow(..), FinishOptions(..)
     ) where
 
 import Development.NSIS.Sugar

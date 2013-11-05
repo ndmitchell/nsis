@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add support for parameters to the finish page
 0.2.3
     Add explicit page events
     #1, add a Win7 taskbar progress plugin module

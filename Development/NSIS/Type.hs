@@ -272,10 +272,27 @@ data Page
     | Directory
     | InstFiles
     | Confirm
-     deriving (Show,Data,Typeable,Read,Eq,Ord)
+    | Finish FinishOptions
+     deriving (Show,Data,Typeable,Eq)
+
+data FinishOptions = FinishOptions
+    {finRun :: String
+    ,finRunText :: String
+    ,finRunParamters :: String
+    ,finRunChecked :: Bool
+    ,finReadme :: String
+    ,finReadmeText :: String
+    ,finReadmeChecked :: Bool
+    ,finLink :: String
+    ,finLinkText :: String
+    } deriving (Data,Typeable,Show,Eq)
+
+instance Default FinishOptions where def = FinishOptions "" "" "" True "" "" True "" ""
+
 
 showPageCtor :: Page -> String
 showPageCtor (License _) = "License"
+showPageCtor (Finish _) = "Finish"
 showPageCtor x = show x
 
 data Level = None | User | Highest | Admin

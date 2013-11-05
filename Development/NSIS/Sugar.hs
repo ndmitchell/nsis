@@ -4,7 +4,7 @@
 
 module Development.NSIS.Sugar(
     Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Visibility(..), FileMode(..), SectionFlag(..),
-    ShowWindow(..),
+    ShowWindow(..), FinishOptions(..),
     module Development.NSIS.Sugar, Label, SectionId
     ) where
 
@@ -1075,6 +1075,9 @@ createShortcut name as = do Value name <- name; x <- foldM f def{scFile=name} as
 
 page :: Page -> Action ()
 page = emit . Page
+
+finishOptions :: FinishOptions
+finishOptions = def
 
 unpage :: Page -> Action ()
 unpage = emit . Unpage
