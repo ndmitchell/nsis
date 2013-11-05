@@ -54,5 +54,6 @@ test-suite shake-test
         Examples.Base64
         Examples.Example1
         Examples.Example2
+        Examples.Finish
         Examples.Primes
         Examples.Taskbar

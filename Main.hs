@@ -13,12 +13,14 @@ import Development.NSIS
 import Examples.Base64
 import Examples.Example1
 import Examples.Example2
+import Examples.Finish
 import Examples.Primes
 import Examples.Taskbar
 
 
 examples = let (*) = (,) in
-    ["base64" * base64, "example1" * example1, "example2" * example2, "primes" * primes, "taskbar" * taskbar]
+    ["base64" * base64, "example1" * example1, "example2" * example2
+    ,"finish" * finish, "primes" * primes, "taskbar" * taskbar]
 
 
 main = do
