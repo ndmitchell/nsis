@@ -76,10 +76,10 @@ module Development.NSIS
     onPageShow, onPagePre, onPageLeave,
     -- ** Section commands
     file, alwaysNonFatal, writeUninstaller, alert, setOutPath, messageBox, requestExecutionLevel,
-    hideProgress, detailPrint,
+    hideProgress, detailPrint, setDetailsPrint,
     -- * Settings
     Compressor(..), HKEY(..), MessageBoxType(..), Attrib(..), Page(..), Level(..), Visibility(..),
-    FileMode(..), SectionFlag(..), ShowWindow(..), FinishOptions(..)
+    FileMode(..), SectionFlag(..), ShowWindow(..), FinishOptions(..), DetailsPrint(..)
     ) where
 
 import Development.NSIS.Sugar
