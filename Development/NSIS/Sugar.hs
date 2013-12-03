@@ -4,7 +4,7 @@
 
 module Development.NSIS.Sugar(
     Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Visibility(..), FileMode(..), SectionFlag(..),
-    ShowWindow(..), FinishOptions(..),
+    ShowWindow(..), FinishOptions(..), DetailsPrint(..),
     module Development.NSIS.Sugar, Label, SectionId
     ) where
 
@@ -901,6 +901,9 @@ caption = emit1 Caption
 
 detailPrint :: Exp String -> Action ()
 detailPrint = emit1 DetailPrint
+
+setDetailsPrint :: DetailsPrint -> Action ()
+setDetailsPrint = emit . SetDetailsPrint
 
 showInstDetails :: Visibility -> Action ()
 showInstDetails = emit . ShowInstDetails

@@ -119,10 +119,22 @@ data NSIS
     | Caption Val
     | ShowInstDetails Visibility
     | ShowUninstDetails Visibility
+    | SetDetailsPrint DetailsPrint
     | DetailPrint Val
     | Plugin String String [Val]
     | Sleep Val
       deriving (Data,Typeable,Show)
+
+-- | Value to use with 'setDetailsPrint'.
+data DetailsPrint = NoDetailsPrint | ListOnly | TextOnly | Both | LastUsed
+    deriving (Data,Typeable,Bounded,Enum,Eq,Ord)
+
+instance Show DetailsPrint where
+    show NoDetailsPrint = "None"
+    show ListOnly = "ListOnly"
+    show TextOnly = "TextOnly"
+    show Both = "Both"
+    show LastUsed = "LastUsed"
 
 -- | Mode to use with 'Development.
 data FileMode
