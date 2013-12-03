@@ -9,6 +9,7 @@ author:             Neil Mitchell <ndmitchell@gmail.com>
 maintainer:         Neil Mitchell <ndmitchell@gmail.com>
 copyright:          Neil Mitchell 2012-2013
 synopsis:           DSL for producing Windows Installer using NSIS.
+tested-with:        GHC==7.6.3, GHC==7.4.2, GHC==7.2.2
 description:
     NSIS (Nullsoft Scriptable Install System, <http://nsis.sourceforge.net/>) is a tool that allows programmers
     to create installers for Windows.
@@ -16,7 +17,6 @@ description:
     of the hard work in developing an install script. Simple NSIS installers should look mostly the same, complex ones should
     be significantly more maintainable.
 homepage:           http://community.haskell.org/~ndm/nsis/
-stability:          Beta
 
 source-repository head
     type:     git
