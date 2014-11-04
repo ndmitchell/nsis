@@ -1,5 +1,5 @@
 :set -package transformers
-:set -fwarn-unused-imports
+:set -fwarn-unused-binds -fwarn-unused-imports
 :load Main.hs
 
 :{
