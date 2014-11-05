@@ -4,7 +4,7 @@ module Main(main) where
 import Control.Monad
 import Data.List
 import Data.Maybe
-import System.Cmd
+import System.Process
 import System.Environment
 import System.Exit
 import System.Info
