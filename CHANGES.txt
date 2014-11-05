@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Remove upper bounds
     #2, add setDetailsPrint
     Add support for parameters to the finish page
 0.2.3
