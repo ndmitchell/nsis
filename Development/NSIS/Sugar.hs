@@ -504,7 +504,7 @@ readRegStr :: HKEY -> Exp String -> Exp String -> Exp String
 readRegStr k a b = do v <- var; emit2 (ReadRegStr v k) a b; return $ Value $ val v
 
 deleteRegKey :: HKEY -> Exp String -> Action ()
-deleteRegKey k = emit1 (DeleteRegKey k)
+deleteRegKey k = emit1 $ DeleteRegKey k
 
 envVar :: Exp String -> Exp String
 envVar a = do v <- var; emit1 (ReadEnvStr v) a; return $ Value $ val v
