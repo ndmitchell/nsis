@@ -863,6 +863,9 @@ messageBox ty x = do
 writeRegStr :: HKEY -> Exp String -> Exp String -> Exp String -> Action ()
 writeRegStr k = emit3 $ WriteRegStr k
 
+writeRegExpandStr :: HKEY -> Exp String -> Exp String -> Exp String -> Action ()
+writeRegExpandStr k = emit3 $ WriteRegExpandStr k
+
 writeRegDWORD :: HKEY -> Exp String -> Exp String -> Exp Int -> Action ()
 writeRegDWORD k = emit3 $ WriteRegDWORD k
 

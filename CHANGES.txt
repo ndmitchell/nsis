@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add writeRegExpandStr
     Expose some window functions findWindow, getDlgItem, sendMessage
     Add WinMessages plugin/header
     Remove upper bounds

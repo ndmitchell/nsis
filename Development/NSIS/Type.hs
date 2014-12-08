@@ -101,6 +101,7 @@ data NSIS
     | MessageBox [MessageBoxType] Val [(String,Label)]
     | CreateShortcut AShortcut
     | WriteRegStr HKEY Val Val Val
+    | WriteRegExpandStr HKEY Val Val Val
     | WriteRegDWORD HKEY Val Val Val
     | ReadRegStr Var HKEY Val Val
     | DeleteRegKey HKEY Val
