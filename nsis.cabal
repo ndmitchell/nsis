@@ -37,6 +37,7 @@ library
     exposed-modules:
         Development.NSIS
         Development.NSIS.Plugins.Base64
+        Development.NSIS.Plugins.EnvVarUpdate
         Development.NSIS.Plugins.Taskbar
         Development.NSIS.Plugins.WinMessages
     other-modules:
