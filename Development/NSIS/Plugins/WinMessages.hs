@@ -4,11 +4,7 @@ List of common Windows Messages
 
 2005 Shengalts Aleksander aka Instructor <Shengalts@mail.ru>
 
-Usage example:
-
-> name "Output"
-> outFile "Output.exe"
-> TODO
+For usage example see @Examples\/WinMessages.hs@.
 
 > Prefix  Message category
 > -------------------------
