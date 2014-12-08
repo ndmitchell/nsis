@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add strIsSuffixOf
     Fix strIsPrefixOf
     Add writeRegExpandStr
     Expose some window functions findWindow, getDlgItem, sendMessage

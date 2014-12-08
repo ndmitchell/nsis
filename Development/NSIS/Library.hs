@@ -34,6 +34,11 @@ strIsPrefixOf :: Exp String -> Exp String -> Exp Bool
 strIsPrefixOf x y = share x $ \x -> share y $ \y ->
     strTake (strLength x) y %== x
 
+-- | Is the first string a prefix of the second.
+strIsSuffixOf :: Exp String -> Exp String -> Exp Bool
+strIsSuffixOf x y = share x $ \x -> share y $ \y ->
+    strDrop (strLength y - strLength x) y %== x
+
 
 -- | Join together a list of strings with @\\r\\n@ after each line. Note that unlike standard 'unlines',
 --   we use the Windows convention line separator.
