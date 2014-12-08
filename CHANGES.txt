@@ -1,5 +1,7 @@
 Changelog for NSIS
 
+    Expose some window functions findWindow, getDlgItem, sendMessage
+    Add WinMessages plugin/header
     Remove upper bounds
     #2, add setDetailsPrint
     Add support for parameters to the finish page
