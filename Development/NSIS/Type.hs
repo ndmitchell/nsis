@@ -105,6 +105,7 @@ data NSIS
     | WriteRegDWORD HKEY Val Val Val
     | ReadRegStr Var HKEY Val Val
     | DeleteRegKey HKEY Val
+    | DeleteRegValue HKEY Val Val
     | ReadEnvStr Var Val
     | Exec Val
     | ExecWait Val
