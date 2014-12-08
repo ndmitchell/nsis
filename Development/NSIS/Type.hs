@@ -123,6 +123,9 @@ data NSIS
     | DetailPrint Val
     | Plugin String String [Val]
     | Sleep Val
+    | FindWindow Var Val Val (Maybe Val) (Maybe Val)
+    | GetDlgItem Var Val Val
+    | SendMessage Val Val Val Val Var (Maybe Val)
       deriving (Data,Typeable,Show)
 
 -- | Value to use with 'setDetailsPrint'.

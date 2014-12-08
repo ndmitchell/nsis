@@ -532,6 +532,7 @@ data Attrib
     | StartOptions String
     | KeyboardShortcut String
     | Id SectionId
+    | Timeout (Exp Int)
       deriving Show
 
 
@@ -1088,3 +1089,39 @@ unpage = emit . Unpage
 
 requestExecutionLevel :: Level -> Action ()
 requestExecutionLevel = emit . RequestExecutionLevel
+
+type HWND = Exp Int
+
+hwndParent :: HWND
+hwndParent = return $ Value [Builtin "HWNDPARENT"]
+
+findWindow :: Exp String -> Exp String -> Maybe HWND -> Action HWND
+findWindow a b c = do
+    v <- var
+    Value a <- a
+    Value b <- b
+    c <- maybe (return Nothing) (fmap (Just . fromValue)) c
+    emit $ FindWindow v a b c Nothing
+    return $ return $ Value $ val v
+
+getDlgItem :: HWND -> Exp Int -> Action HWND
+getDlgItem a b = do
+    v <- var
+    Value a <- a
+    Value b <- b
+    emit $ GetDlgItem v a b
+    return $ return $ Value $ val v
+
+sendMessage :: [Attrib] -> HWND -> Exp Int -> Exp a -> Exp b -> Action (Exp Int)
+sendMessage as a b c d = do
+    v <- var
+    Value a <- a
+    Value b <- b
+    Value c <- c
+    Value d <- d
+    as <- foldM f Nothing as
+    emit $ SendMessage a b c d v as
+    return $ return $ Value $ val v
+    where
+        f c (Timeout x) = do Value x <- x; return $ Just x
+        f c x = error $ "Invalid attribute to sendMessage: " ++ show x

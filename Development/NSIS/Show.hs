@@ -8,6 +8,7 @@ import Data.Generics.Uniplate.Data
 import Data.Char
 import Data.Function
 import Data.List
+import Data.Maybe
 
 
 showNSIS :: [NSIS] -> [String]
@@ -108,6 +109,8 @@ out fs (IntOp a b "~" _) = [unwords $ "IntOp" : [show a, show b, "~"]] -- the on
 out fs (ExecShell AExecShell{..}) = [unwords ["ExecShell","\"\"",show esCommand,show esShow]]
 out fs (Plugin a b cs) = [unwords $ (a ++ "::" ++ b) : map show cs]
 out fs (AddPluginDir a) = [unwords ["!addplugindir",show a]]
+out fs (FindWindow a b c d e) = [unwords $ "FindWindow" : show a : map show ([b,c] ++ maybeToList d ++ maybeToList e)]
+out fs (SendMessage a b c d e f) = [unwords $ "SendMessage" : show a : show b : show c : show d : show e : ["/timeout=" ++ show x | Just x <- [f]]]
 
 out fs x = [show x]
 
