@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Fix strIsPrefixOf
     Add writeRegExpandStr
     Expose some window functions findWindow, getDlgItem, sendMessage
     Add WinMessages plugin/header

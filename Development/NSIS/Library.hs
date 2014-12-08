@@ -32,7 +32,7 @@ strReplace from to str = do
 -- | Is the first string a prefix of the second.
 strIsPrefixOf :: Exp String -> Exp String -> Exp Bool
 strIsPrefixOf x y = share x $ \x -> share y $ \y ->
-    strTake (strLength x) y %== strTake (strLength y) x
+    strTake (strLength x) y %== x
 
 
 -- | Join together a list of strings with @\\r\\n@ after each line. Note that unlike standard 'unlines',
