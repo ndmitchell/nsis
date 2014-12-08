@@ -59,6 +59,7 @@ test-suite shake-test
 
     other-modules:
         Examples.Base64
+        Examples.EnvVarUpdate
         Examples.Example1
         Examples.Example2
         Examples.Finish
