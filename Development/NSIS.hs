@@ -47,7 +47,7 @@ module Development.NSIS
     (%==), (%/=), (%<=), (%<), (%>=), (%>),
     true, false, not_,
     strRead, strShow,
-    (&), strConcat, strLength, strTake, strDrop, strReplace, strIsPrefixOf, strIsSuffixOf, strUnlines,
+    (&), strConcat, strLength, strTake, strDrop, strReplace, strIsPrefixOf, strIsSuffixOf, strUnlines, strCheck,
     -- ** File system manipulation
     FileHandle, fileOpen, fileWrite, fileClose, withFile', writeFile', writeFileLines,
     rmdir, delete, copyFiles,

@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add strCheck function
     Add strIsSuffixOf
     Fix strIsPrefixOf
     Add writeRegExpandStr
