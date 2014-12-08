@@ -63,3 +63,4 @@ test-suite shake-test
         Examples.Finish
         Examples.Primes
         Examples.Taskbar
+        Examples.WinMessages

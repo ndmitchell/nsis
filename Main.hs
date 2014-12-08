@@ -16,11 +16,13 @@ import Examples.Example2
 import Examples.Finish
 import Examples.Primes
 import Examples.Taskbar
+import Examples.WinMessages
 
 
 examples = let (*) = (,) in
     ["base64" * base64, "example1" * example1, "example2" * example2
-    ,"finish" * finish, "primes" * primes, "taskbar" * taskbar]
+    ,"finish" * finish, "primes" * primes, "taskbar" * taskbar
+    ,"winmessages" * winmessages]
 
 
 main = do
