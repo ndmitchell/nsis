@@ -14,7 +14,7 @@ winmessages = do
     section "" [] $ do
         wnd <- findWindow "#32770" "" (Just hwndParent)
         ctl <- getDlgItem wnd 1027
-        sendMessage [] ctl wm_SETTEXT (0 :: Exp Int) ("STR:MyText" :: Exp String)
+        _ <- sendMessage [] ctl wm_SETTEXT (0 :: Exp Int) ("STR:MyText" :: Exp String)
         return ()
 
 {-
