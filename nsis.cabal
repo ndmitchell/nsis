@@ -38,6 +38,7 @@ library
         Development.NSIS
         Development.NSIS.Plugins.Base64
         Development.NSIS.Plugins.Taskbar
+        Development.NSIS.Plugins.WinMessages
     other-modules:
         Development.NSIS.Library
         Development.NSIS.Optimise
