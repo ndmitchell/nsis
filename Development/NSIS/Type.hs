@@ -127,7 +127,7 @@ data NSIS
     | Sleep Val
     | FindWindow Var Val Val (Maybe Val) (Maybe Val)
     | GetDlgItem Var Val Val
-    | SendMessage Val Val Val Val Var (Maybe Val)
+    | SendMessage Val Val Val Val Var (Maybe Int)
     | Abort Val
       deriving (Data,Typeable,Show)
 

@@ -535,7 +535,7 @@ data Attrib
     | StartOptions String
     | KeyboardShortcut String
     | Id SectionId
-    | Timeout (Exp Int)
+    | Timeout Int
       deriving Show
 
 
@@ -1125,11 +1125,11 @@ sendMessage as a b c d = do
     Value b <- b
     Value c <- c
     Value d <- d
-    as <- foldM f Nothing as
+    as <- return $ foldl f Nothing as
     emit $ SendMessage a b c d v as
     return $ return $ Value $ val v
     where
-        f c (Timeout x) = do Value x <- x; return $ Just x
+        f c (Timeout x) = Just x
         f c x = error $ "Invalid attribute to sendMessage: " ++ show x
 
 abort :: Exp String -> Action ()
