@@ -1128,3 +1128,6 @@ sendMessage as a b c d = do
     where
         f c (Timeout x) = do Value x <- x; return $ Just x
         f c x = error $ "Invalid attribute to sendMessage: " ++ show x
+
+abort :: Exp String -> Action ()
+abort = emit1 Abort

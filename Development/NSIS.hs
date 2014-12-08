@@ -58,7 +58,7 @@ module Development.NSIS
     -- ** Environment variables
     envVar,
     -- ** Process execution
-    exec, execWait, execShell, sleep,
+    exec, execWait, execShell, sleep, abort,
     -- ** Windows
     HWND, hwndParent, findWindow, getDlgItem, sendMessage,
     -- ** Plugins
