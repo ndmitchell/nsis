@@ -21,7 +21,7 @@ import Examples.EnvVarUpdate
 
 
 examples = let (*) = (,) in
-    ["base64" * base64, "example1" * example1, "example2" * example2
+    ["example1" * example1, "example2" * example2, "base64" * base64
     ,"finish" * finish, "primes" * primes, "taskbar" * taskbar
     ,"winmessages" * winmessages, "envvarupdate" * envvarupdate]
 
