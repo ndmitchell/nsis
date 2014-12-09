@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+0.2.4
     #3, clone the EnvVarUpdate plugin
     Add abort
     Add strCheck function
