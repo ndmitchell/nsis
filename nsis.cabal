@@ -55,6 +55,7 @@ test-suite shake-test
         base == 4.*,
         transformers >= 0.2,
         uniplate >= 1.5,
+        directory,
         process
 
     other-modules:
