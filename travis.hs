@@ -4,4 +4,4 @@ import System.Process.Extra
 
 main = do
     retry 3 $ system_ "sudo apt-get install nsis"
-    system_ "makensis --version"
+    system_ "runhaskell Main --build"
