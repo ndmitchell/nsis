@@ -57,7 +57,7 @@ main = do
         let script = fromMaybe (error $ "Unknown example: " ++ name) $ lookup name examples
         unless ("--nowrite" `elem` flags) $ writeFile (name ++ ".nsi") $ nsis script
         when build $ do
-            r <- system $ "makensis /V3 " ++ name ++ ".nsi"
+            r <- system $ "makensis -V3 " ++ name ++ ".nsi"
             when (r /= ExitSuccess) $ error "NSIS FAILED"
         when ("--run" `elem` flags) $ do
             system $ name ++ ".exe"
