@@ -204,9 +204,10 @@ data AFile = AFile
     {filePath :: Val
     ,fileNonFatal :: Bool
     ,fileRecursive :: Bool
+    ,fileOName :: Maybe Val
     } deriving (Data,Typeable,Show)
 
-instance Default AFile where def = AFile def False False
+instance Default AFile where def = AFile def False False Nothing
 
 data ARMDir = ARMDir
     {rmDir :: Val

@@ -536,6 +536,7 @@ data Attrib
     | KeyboardShortcut String
     | Id SectionId
     | Timeout Int
+    | OName (Exp String)
       deriving Show
 
 
@@ -955,10 +956,11 @@ setCompressor x as = emit $ SetCompressor $ foldl f def{compType=x} as
         f c x = error $ "Invalid attribute to setCompress: " ++ show x
 
 file :: [Attrib] -> Exp FilePath -> Action ()
-file as x = do Value x <- x; emit $ File $ foldl f def{filePath=x} as
+file as x = do Value x <- x; emit . File =<< foldM f def{filePath=x} as
     where
-        f c Recursive = c{fileRecursive=True}
-        f c NonFatal = c{fileNonFatal=True}
+        f c Recursive = return c{fileRecursive=True}
+        f c NonFatal = return c{fileNonFatal=True}
+        f c (OName x) = do Value x <- x; return c{fileOName=Just x}
         f c x = error $ "Invalid attribute to file: " ++ show x
 
 section :: Exp String -> [Attrib] -> Action () -> Action ()

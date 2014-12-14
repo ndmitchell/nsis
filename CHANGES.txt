@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Support OName on file
 0.2.4
     #3, clone the EnvVarUpdate plugin
     Add abort

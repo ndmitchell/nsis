@@ -83,7 +83,7 @@ out fs (SectionGroup ASectionGroup{secgId=SectionId secgId, ..} xs) =
     [unwords $ "SectionGroup" : ["/e"|secgExpanded] ++ [show secgName, "_sec" ++ show secgId]] ++
     map indent (outs fs xs) ++
     ["SectionGroupEnd"]
-out fs (File AFile{..}) = [unwords $ "File" : ["/nonfatal"|fileNonFatal] ++ ["/r"|fileRecursive] ++ [show filePath]]
+out fs (File AFile{..}) = [unwords $ "File" : ["/nonfatal"|fileNonFatal] ++ ["/r"|fileRecursive] ++ [show $ Literal "/oname=" : x | Just x <- [fileOName]] ++ [show filePath]]
 out fs (Labeled i) = [show i ++ ":"]
 out fs (CreateShortcut AShortcut{..}) = return $ unwords $
     ["CreateShortcut", show scFile, show scTarget, show scParameters, show scIconFile
