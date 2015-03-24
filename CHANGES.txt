@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Make constant force an evaluation
     Make section return the section id
     Generalise the type of nsis
     Add a radio button example
