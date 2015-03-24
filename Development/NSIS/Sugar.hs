@@ -963,13 +963,14 @@ file as x = do Value x <- x; emit . File =<< foldM f def{filePath=x} as
         f c (OName x) = do Value x <- x; return c{fileOName=Just x}
         f c x = error $ "Invalid attribute to file: " ++ show x
 
-section :: Exp String -> [Attrib] -> Action () -> Action ()
+section :: Exp String -> [Attrib] -> Action () -> Action SectionId
 section name as act = do
     sec <- newSectionId
     Value name <- name
     (xs, _) <- capture $ scope act
     x <- foldM f def{secId=sec, secName=name} as
     emit $ Section x xs
+    return $ secId x
     where
         f c Unselected = return c{secUnselected=True}
         f c Required = return c{secRequired=True}
@@ -977,13 +978,14 @@ section name as act = do
         f c (Id x) = return c{secId=x}
         f c x = error $ "Invalid attribute to section: " ++ show x
 
-sectionGroup :: Exp String -> [Attrib] -> Action () -> Action ()
+sectionGroup :: Exp String -> [Attrib] -> Action () -> Action SectionId
 sectionGroup name as act = do
     sec <- newSectionId
     Value name <- name
     (xs, _) <- capture $ scope act
     x <- foldM f def{secgId=sec, secgName=name} as
     emit $ SectionGroup x xs
+    return $ secgId x
     where
         f c Expanded = return c{secgExpanded=True}
         f c (Description x) = do Value x <- x; return c{secgDescription=x}
@@ -991,7 +993,7 @@ sectionGroup name as act = do
         f c x = error $ "Invalid attribute to sectionGroup: " ++ show x
 
 uninstall :: Action () -> Action ()
-uninstall = section "Uninstall" []
+uninstall = void . section "Uninstall" []
 
 -- | Delete file (which can be a file or wildcard, but should be specified with a full path) from the target system.
 --   If 'RebootOK' is specified and the file cannot be deleted then the file is deleted when the system reboots --
