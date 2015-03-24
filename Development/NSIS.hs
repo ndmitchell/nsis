@@ -84,6 +84,7 @@ module Development.NSIS
     FileMode(..), SectionFlag(..), ShowWindow(..), FinishOptions(..), DetailsPrint(..)
     ) where
 
+import Control.Monad
 import Development.NSIS.Sugar
 import Development.NSIS.Show
 import Development.NSIS.Optimise
@@ -91,12 +92,12 @@ import Development.NSIS.Library
 
 
 -- | Create the contents of an NSIS script from an installer specification.
-nsis :: Action () -> String
-nsis = unlines . showNSIS . optimise . runAction
+nsis :: Action a -> String
+nsis = unlines . showNSIS . optimise . runAction . void
 
 
 -- | Like 'nsis', but don't try and optimise the resulting NSIS script. Useful
 --   to figure out how the underlying installer works, or if you believe the
 --   optimisations are introducing bugs (but please do report any such bugs!).
-nsisNoOptimise :: Action () -> String
-nsisNoOptimise = unlines . showNSIS . runAction
+nsisNoOptimise :: Action a -> String
+nsisNoOptimise = unlines . showNSIS . runAction . void
