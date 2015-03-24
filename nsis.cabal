@@ -65,5 +65,6 @@ test-suite nsis-test
         Examples.Example2
         Examples.Finish
         Examples.Primes
+        Examples.Radio
         Examples.Taskbar
         Examples.WinMessages

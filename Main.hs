@@ -15,6 +15,7 @@ import Examples.Example1
 import Examples.Example2
 import Examples.Finish
 import Examples.Primes
+import Examples.Radio
 import Examples.Taskbar
 import Examples.WinMessages
 import Examples.EnvVarUpdate
@@ -22,7 +23,7 @@ import Examples.EnvVarUpdate
 
 examples = let (*) = (,) in
     ["example1" * example1, "example2" * example2, "base64" * base64
-    ,"finish" * finish, "primes" * primes, "taskbar" * taskbar
+    ,"finish" * finish, "primes" * primes, "radio" * radio, "taskbar" * taskbar
     ,"winmessages" * winmessages, "envvarupdate" * envvarupdate]
 
 
