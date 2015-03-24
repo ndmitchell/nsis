@@ -22,9 +22,9 @@ import Examples.EnvVarUpdate
 
 
 examples = let (*) = (,) in
-    ["example1" * example1, "example2" * example2, "base64" * base64
-    ,"finish" * finish, "primes" * primes, "radio" * radio, "taskbar" * taskbar
-    ,"winmessages" * winmessages, "envvarupdate" * envvarupdate]
+    ["example1" * void example1, "example2" * void example2, "base64" * void base64
+    ,"finish" * void finish, "primes" * void primes, "radio" * void radio, "taskbar" * void taskbar
+    ,"winmessages" * void winmessages, "envvarupdate" * void envvarupdate]
 
 
 main = do
