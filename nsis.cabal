@@ -39,6 +39,7 @@ library
         Development.NSIS.Plugins.Base64
         Development.NSIS.Plugins.EnvVarUpdate
         Development.NSIS.Plugins.Taskbar
+        Development.NSIS.Plugins.Sections
         Development.NSIS.Plugins.WinMessages
     other-modules:
         Development.NSIS.Library
