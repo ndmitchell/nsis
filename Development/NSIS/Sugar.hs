@@ -344,12 +344,18 @@ constant name x = do x <- constant_ x; xx <- x; addScope name xx; return x
 --   Equivalent to @'share' 'return'@.
 constant_ :: Exp t -> Action (Exp t)
 constant_ x = do
-    -- be careful, we want to share the value, but also snapshot it so if it's got mutable
-    -- variables inside they don't change
-    v <- var
-    return (Value $ val v) @= x
-    -- add the Literal so that assignment throws an error in future
-    return $ return $ Value [Var_ v, Literal ""]
+    -- either the expression is entirely constant, or has mutable variables inside it
+    Value x <- x
+    if null [() | Var_{} <- x] then
+        -- if it's totally constant, we want to leave it that way so it works in non-eval settings (e.g. file)
+        return $ return $ Value x
+     else do
+        -- if it's mutable, we want to share the value, but also snapshot it so that the mutable variables
+        -- don't change afterwards
+        v <- var
+        return (Value $ val v) @= return (Value x)
+        -- add the Literal so that assignment throws an error in future
+        return $ return $ Value [Var_ v, Literal ""]
 
 
 -- | The 'Exp' language is call-by-name, meaning you must use share to avoid evaluating an exression
