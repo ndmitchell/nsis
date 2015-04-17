@@ -15,10 +15,12 @@ import Development.NSIS
 
 example2 = do
     -- The name of the installer
-    name "Example2"
+    constantStr "Ex" "2"
+
+    name "Example$Ex"
 
     -- The file to write
-    outFile "example2.exe"
+    outFile "example$Ex.exe"
 
     -- The default installation directory
     installDir "$PROGRAMFILES/Example2"
@@ -50,7 +52,7 @@ example2 = do
         setOutPath "$INSTDIR"
 
         -- Put file there
-        file [] "Examples/Example2.hs"
+        file [] "Examples/Example$Ex.hs"
 
         -- Write the installation path into the registry
         writeRegStr HKLM "SOFTWARE/NSIS_Example2" "Install_Dir" "$INSTDIR"
