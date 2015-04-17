@@ -15,7 +15,7 @@ import Development.NSIS
 
 example2 = do
     -- The name of the installer
-    constantStr "Ex" "2"
+    _ <- constantStr "Ex" "2"
 
     name "Example$Ex"
 
