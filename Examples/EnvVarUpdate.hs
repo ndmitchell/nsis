@@ -39,3 +39,13 @@ envvarupdate = do
 
         alert $ "USER $$PATH = " & getEnvVar HKCU "PATH"
         alert $ "MACHINE $$PATH = " & getEnvVar HKLM "PATH"
+
+        alert "Expecting to abort with a String limit error"
+        deleteEnvVar HKCU "NSIS_TEST"
+        val <- mutable_ "This is a test that will overflow at some point"
+        i <- mutable_ 0
+        while (i %< 100) $ do
+           i @= i + 1
+           val @= val & val
+           setEnvVar HKCU "NSIS_TEST" val
+        alert "Failed test, should have got a string limit error"
