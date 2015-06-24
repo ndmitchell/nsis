@@ -29,11 +29,12 @@ strReplace from to str = do
         res
 
 -- | Attempt to check that you haven't reached the string limit
-strCheck :: Exp String -> Exp String
-strCheck x = share x $ \x -> do
+strCheck :: Exp String -> Exp String -> Exp String
+strCheck msg x = share x $ \x -> do
     let special = "@!!_NSIS"
-    iff_ (not_ $ special `strIsSuffixOf` (x & special)) $
-        abort "String limit exceeded"
+    iff_ (not_ $ special `strIsSuffixOf` (x & special)) $ do
+        messageBox [MB_ICONSTOP] $ "ERROR: String limit exceeded,\n" & msg
+        abort $ "ERROR: String limit exceeded, " & msg
     x
 
 

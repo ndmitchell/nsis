@@ -36,14 +36,14 @@ remove x xs = share x $ \x -> share xs $ \xs -> do
 -- | Set an environment variable by writing to the registry.
 setEnvVar :: HKEY -> Exp String -> Exp String -> Action ()
 setEnvVar h key val = do
-    writeRegExpandStr h (fromString $ resolve h) key (strCheck val)
+    writeRegExpandStr h (fromString $ resolve h) key (strCheck ("setting environment variable %" & key & "%") val)
     void $ sendMessage [Timeout 5000] hwnd_BROADCAST wm_WININICHANGE (0 :: Exp Int) ("STR:Environment" :: Exp String)
 
 
 -- | Read a variable from the registry. If you are not modifying the variable
 --   you should use 'envVar' instead.
 getEnvVar :: HKEY -> Exp String -> Exp String
-getEnvVar h key = strCheck $ readRegStr h (fromString $ resolve h) key
+getEnvVar h key = strCheck ("reading environment variable %" & key & "%") $ readRegStr h (fromString $ resolve h) key
 
 
 -- | Delete the environment variable in the registry.

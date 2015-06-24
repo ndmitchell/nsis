@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Make strCheck take a message
     Add a plugin for helping with radio button
     Make constant force an evaluation
     Make section return the section id
