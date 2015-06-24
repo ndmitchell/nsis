@@ -28,7 +28,13 @@ strReplace from to str = do
                     rest @= strDrop 1 rest)
         res
 
--- | Attempt to check that you haven't reached the string limit
+-- | NSIS (the underlying installer, not this library) uses fixed length string buffers,
+--   defaulting to 1024 bytes. Any strings longer than
+--   the limit may cause truncation or segfaults. You can get builds supporting longer strings
+--   from <http://nsis.sourceforge.net/Special_Builds>.
+--
+--   Given @strCheck msg val@, if @val@ exceeds the limit it will 'abort' with @msg@, otherwise
+--   it will return 'val'.
 strCheck :: Exp String -> Exp String -> Exp String
 strCheck msg x = share x $ \x -> do
     let special = "@!!_NSIS"
