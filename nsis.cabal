@@ -19,7 +19,7 @@ description:
 homepage:           https://github.com/ndmitchell/nsis#readme
 bug-reports:        https://github.com/ndmitchell/nsis/issues
 
-extra-source-files:
+extra-doc-files:
     CHANGES.txt
     README.md
 
