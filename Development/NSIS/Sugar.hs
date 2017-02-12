@@ -1083,7 +1083,7 @@ copyFiles as from to = do
 -- > createDirectory "$SMPROGRAMS/My Company"
 -- > createShortcut "$SMPROGRAMS/My Company/My Program.lnk"
 -- >    [Target "$INSTDIR/My Program.exe"
--- >    ,Parameter "some command line parameters"
+-- >    ,Parameters "some command line parameters"
 -- >    ,IconFile "$INSTDIR/My Program.exe", IconIndex 2
 -- >    ,StartOptions "SW_SHOWNORMAL"
 -- >    ,KeyboardShortcut "ALT|CONTROL|SHIFT|F5"
