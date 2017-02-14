@@ -1151,3 +1151,9 @@ sendMessage as a b c d = do
 
 abort :: Exp String -> Action ()
 abort = emit1 Abort
+
+injectLiteral :: String -> Action ()
+injectLiteral = emit . InjectLiteral
+
+injectGlobalLiteral :: String -> Action ()
+injectGlobalLiteral = emit . InjectGlobalLiteral

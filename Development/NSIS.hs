@@ -79,6 +79,8 @@ module Development.NSIS
     -- ** Section commands
     file, alwaysNonFatal, writeUninstaller, alert, setOutPath, messageBox, requestExecutionLevel,
     hideProgress, detailPrint, setDetailsPrint,
+    -- * Escape hatch
+    injectLiteral, injectGlobalLiteral,
     -- * Settings
     Compressor(..), HKEY(..), MessageBoxType(..), Attrib(..), Page(..), Level(..), Visibility(..),
     FileMode(..), SectionFlag(..), ShowWindow(..), FinishOptions(..), DetailsPrint(..)

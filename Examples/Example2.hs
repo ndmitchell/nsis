@@ -32,6 +32,9 @@ example2 = do
     -- Request application privileges for Windows Vista
     requestExecutionLevel Admin
 
+    -- Inject a literal setting that's not currently supported by the DSL
+    injectGlobalLiteral "# ignore me (could be an injected literal)"
+
     ----------------------------------
 
     -- Pages
@@ -53,6 +56,9 @@ example2 = do
 
         -- Put file there
         file [] "Examples/Example$Ex.hs"
+
+        -- Inject a non-global literal setting
+        injectLiteral "# ignore me (could be an injected literal)"
 
         -- Write the installation path into the registry
         writeRegStr HKLM "SOFTWARE/NSIS_Example2" "Install_Dir" "$INSTDIR"
