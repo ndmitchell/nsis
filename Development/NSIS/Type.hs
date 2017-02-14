@@ -130,6 +130,10 @@ data NSIS
     | GetDlgItem Var Val Val
     | SendMessage Val Val Val Val Var (Maybe Int)
     | Abort Val
+
+      -- Escape hatch
+    | InjectLiteral String
+    | InjectGlobalLiteral String
       deriving (Data,Typeable,Show)
 
 -- | Value to use with 'setDetailsPrint'.
