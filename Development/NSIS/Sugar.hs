@@ -933,6 +933,8 @@ showInstDetails = emit . ShowInstDetails
 showUninstDetails :: Visibility -> Action ()
 showUninstDetails = emit . ShowUninstDetails
 
+unicode :: Bool -> Action ()
+unicode = emit . Unicode
 
 -- | The type of a file handle, created by 'fileOpen'.
 data FileHandle deriving Typeable

@@ -121,6 +121,7 @@ data NSIS
     | Caption Val
     | ShowInstDetails Visibility
     | ShowUninstDetails Visibility
+    | Unicode Bool
     | SetDetailsPrint DetailsPrint
     | DetailPrint Val
     | Plugin String String [Val]
