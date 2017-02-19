@@ -933,6 +933,7 @@ showInstDetails = emit . ShowInstDetails
 showUninstDetails :: Visibility -> Action ()
 showUninstDetails = emit . ShowUninstDetails
 
+-- | Note: Requires NSIS 3.0
 unicode :: Bool -> Action ()
 unicode = emit . Unicode
 
