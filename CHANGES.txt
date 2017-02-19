@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    #10, add unicode function
 0.3
     Make strCheck take a message
     Add a plugin for helping with radio button
