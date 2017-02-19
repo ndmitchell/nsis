@@ -68,7 +68,8 @@ module Development.NSIS
     -- ** Global installer options
     name, outFile, installDir, setCompressor,
     installIcon, uninstallIcon, headerImage,
-    installDirRegKey, allowRootDirInstall, caption, showInstDetails, showUninstDetails,
+    installDirRegKey, allowRootDirInstall, caption,
+    showInstDetails, showUninstDetails, unicode,
     -- ** Sections
     SectionId, section, sectionGroup, newSectionId,
     sectionSetText, sectionGetText, sectionSet, sectionGet,
