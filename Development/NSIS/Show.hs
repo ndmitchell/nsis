@@ -60,6 +60,7 @@ isGlobal x = case x of
     ShowInstDetails{} -> True
     ShowUninstDetails{} -> True
     Caption{} -> True
+    Unicode{} -> True
     UnsafeInjectGlobal{} -> True
     _ -> False
 
