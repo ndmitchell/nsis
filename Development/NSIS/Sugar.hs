@@ -1152,8 +1152,10 @@ sendMessage as a b c d = do
 abort :: Exp String -> Action ()
 abort = emit1 Abort
 
-injectLiteral :: String -> Action ()
-injectLiteral = emit . InjectLiteral
+-- | Inject arbitrary text into a non-global section of the script.
+unsafeInject :: String -> Action ()
+unsafeInject = emit . UnsafeInject
 
-injectGlobalLiteral :: String -> Action ()
-injectGlobalLiteral = emit . InjectGlobalLiteral
+-- | Inject arbitrary text into the script's global header section.
+unsafeInjectGlobal :: String -> Action ()
+unsafeInjectGlobal = emit . UnsafeInjectGlobal

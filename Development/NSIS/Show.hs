@@ -60,7 +60,7 @@ isGlobal x = case x of
     ShowInstDetails{} -> True
     ShowUninstDetails{} -> True
     Caption{} -> True
-    InjectGlobalLiteral{} -> True
+    UnsafeInjectGlobal{} -> True
     _ -> False
 
 isSection :: NSIS -> Bool
@@ -112,8 +112,8 @@ out fs (Plugin a b cs) = [unwords $ (a ++ "::" ++ b) : map show cs]
 out fs (AddPluginDir a) = [unwords ["!addplugindir",show a]]
 out fs (FindWindow a b c d e) = [unwords $ "FindWindow" : show a : map show ([b,c] ++ maybeToList d ++ maybeToList e)]
 out fs (SendMessage a b c d e f) = [unwords $ "SendMessage" : show a : show b : show c : show d : show e : ["/TIMEOUT=" ++ show x | Just x <- [f]]]
-out fs (InjectLiteral x) = [x]
-out fs (InjectGlobalLiteral x) = [x]
+out fs (UnsafeInject x) = [x]
+out fs (UnsafeInjectGlobal x) = [x]
 
 out fs x = [show x]
 
