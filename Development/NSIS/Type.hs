@@ -132,8 +132,8 @@ data NSIS
     | Abort Val
 
       -- Escape hatch
-    | InjectLiteral String
-    | InjectGlobalLiteral String
+    | UnsafeInject String
+    | UnsafeInjectGlobal String
       deriving (Data,Typeable,Show)
 
 -- | Value to use with 'setDetailsPrint'.
