@@ -1154,3 +1154,11 @@ sendMessage as a b c d = do
 
 abort :: Exp String -> Action ()
 abort = emit1 Abort
+
+-- | Inject arbitrary text into a non-global section of the script.
+unsafeInject :: String -> Action ()
+unsafeInject = emit . UnsafeInject
+
+-- | Inject arbitrary text into the script's global header section.
+unsafeInjectGlobal :: String -> Action ()
+unsafeInjectGlobal = emit . UnsafeInjectGlobal

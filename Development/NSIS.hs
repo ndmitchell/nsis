@@ -80,6 +80,8 @@ module Development.NSIS
     -- ** Section commands
     file, alwaysNonFatal, writeUninstaller, alert, setOutPath, messageBox, requestExecutionLevel,
     hideProgress, detailPrint, setDetailsPrint,
+    -- * Escape hatch
+    unsafeInject, unsafeInjectGlobal,
     -- * Settings
     Compressor(..), HKEY(..), MessageBoxType(..), Attrib(..), Page(..), Level(..), Visibility(..),
     FileMode(..), SectionFlag(..), ShowWindow(..), FinishOptions(..), DetailsPrint(..)
@@ -93,12 +95,18 @@ import Development.NSIS.Library
 
 
 -- | Create the contents of an NSIS script from an installer specification.
+--
+-- Beware, 'unsafeInject' and 'unsafeInjectGlobal' may break 'nsis'. The
+-- optimizer relies on invariants that may not hold when arbitrary lines are
+-- injected. Consider using 'nsisNoOptimise' if problems arise.
 nsis :: Action a -> String
 nsis = unlines . showNSIS . optimise . runAction . void
 
 
--- | Like 'nsis', but don't try and optimise the resulting NSIS script. Useful
---   to figure out how the underlying installer works, or if you believe the
---   optimisations are introducing bugs (but please do report any such bugs!).
+-- | Like 'nsis', but don't try and optimise the resulting NSIS script.
+--
+-- Useful to figure out how the underlying installer works, or if you believe
+-- the optimisations are introducing bugs. Please do report any such bugs,
+-- especially if you aren't using 'unsafeInject' or 'unsafeInjectGlobal'!
 nsisNoOptimise :: Action a -> String
 nsisNoOptimise = unlines . showNSIS . runAction . void
