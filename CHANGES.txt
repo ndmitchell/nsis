@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    #11, add unsafeInject and unsafeInjectGlobal
     #10, add unicode function
 0.3
     Make strCheck take a message
