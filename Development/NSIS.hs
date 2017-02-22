@@ -70,6 +70,7 @@ module Development.NSIS
     installIcon, uninstallIcon, headerImage,
     installDirRegKey, allowRootDirInstall, caption,
     showInstDetails, showUninstDetails, unicode,
+    requestExecutionLevel,
     -- ** Sections
     SectionId, section, sectionGroup, newSectionId,
     sectionSetText, sectionGetText, sectionSet, sectionGet,
@@ -78,7 +79,7 @@ module Development.NSIS
     event, onSelChange,
     onPageShow, onPagePre, onPageLeave,
     -- ** Section commands
-    file, alwaysNonFatal, writeUninstaller, alert, setOutPath, messageBox, requestExecutionLevel,
+    file, alwaysNonFatal, writeUninstaller, alert, setOutPath, messageBox,
     hideProgress, detailPrint, setDetailsPrint,
     -- * Escape hatch
     unsafeInject, unsafeInjectGlobal,
