@@ -1,4 +1,4 @@
-{-# LANGUAGE PatternGuards #-}
+{-# LANGUAGE PatternGuards, LambdaCase #-}
 
 module Development.NSIS.Optimise(optimise) where
 
@@ -46,7 +46,7 @@ elimLabeledGoto x = transformBi f x
             | otherwise = x
 
         moveBounce x = fromMaybe x $ lookup x bounce
-        bounce = flip concatMap (universe x) $ \x -> case x of
+        bounce = flip concatMap (universe x) $ \case
             Labeled x:Goto y:_ -> [(x,y)]
             Labeled x:Labeled y:_ -> [(x,y)]
             _ -> []
