@@ -1,6 +1,7 @@
 :set -package transformers
-:set -fwarn-unused-binds -fwarn-unused-imports
-:load Main.hs
+:set -fwarn-unused-binds -fwarn-unused-imports -fwarn-orphans
+:set -isrc;test
+:load test/Main.hs
 
 :{
 :def docs_ const $ return $ unlines
