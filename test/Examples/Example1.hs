@@ -41,4 +41,4 @@ example1 = do
         setOutPath "$INSTDIR"
 
         -- Put file there
-        file [] "Examples/Example1.hs"
+        file [] "test/Examples/Example1.hs"

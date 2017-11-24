@@ -55,7 +55,7 @@ example2 = do
         setOutPath "$INSTDIR"
 
         -- Put file there
-        file [] "Examples/Example$Ex.hs"
+        file [] "test/Examples/Example$Ex.hs"
 
         -- Inject a non-global literal setting
         unsafeInject "# ignore me (could be an injected literal)"

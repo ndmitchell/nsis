@@ -19,7 +19,7 @@ radio = do
 
     section "Core files" [Required] $ do
         setOutPath "$INSTDIR"
-        file [] "Examples/Radio.hs"
+        file [] "test/Examples/Radio.hs"
 
     local <- section "Add to user %PATH%" [] $ do
         setEnvVarPrepend HKCU "PATH" "$INSTDIR"
