@@ -13,7 +13,9 @@ import Development.NSIS.Type
 import Data.Char
 import Data.List
 import Data.Maybe
-import Data.Monoid
+import Data.Semigroup
+import qualified Data.List.NonEmpty as NonEmpty
+import Data.Monoid hiding ((<>))
 import Data.String
 import Data.Data
 import Data.Bits
@@ -217,9 +219,13 @@ instance Fractional (Exp Int) where
     fromRational = error "fromRational is not available for Exp, only Int is supported"
     (/) = intOp "/"
 
+instance Semigroup (Exp String) where
+    x <> y = mconcat [x,y]
+    sconcat = mconcat . NonEmpty.toList
+
 instance Monoid (Exp String) where
     mempty = fromString ""
-    mappend x y = mconcat [x,y]
+    mappend = (<>)
     mconcat xs = do
         xs <- sequence xs
         return $ Value $ f $ concatMap fromValue xs
