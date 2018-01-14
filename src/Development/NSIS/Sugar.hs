@@ -72,7 +72,7 @@ lit x = [Literal x | x /= ""]
 -- 'while' var $ do
 --     'iff_' cond1 $ 'goto' abort
 --     'iff_' cond2 $ 'goto' abort
---     var '@=' 'strDrop' 1 var 
+--     var '@=' 'strDrop' 1 var
 -- 'label' abort
 -- @
 --
@@ -163,7 +163,7 @@ instance forall a . Typeable a => IsString (Exp a) where
         -- "$VAR" permits any type, everything else requires string
         case parseString o of
             [Right var] -> return $ Value $ grab [rty] var
-            
+
             _ | rty /= tyString ->
                 error $ "Cannot use concatenated variables/literals to produce anything other than String, but you tried " ++ show rty ++ ", in " ++ show o
             xs -> fmap (Value . fromValue) $ strConcat $ flip map xs $ \i -> return $ Value $ case i of
@@ -195,7 +195,7 @@ instance Num (Exp Int) where
     (*) = intOp "*"
     (-) = intOp "-"
     abs a = share a $ \a -> a %< 0 ? (negate a, a)
-    signum a = share a $ \a -> a %== 0 ? (0, a %< 0 ? (-1, 1))    
+    signum a = share a $ \a -> a %== 0 ? (0, a %< 0 ? (-1, 1))
 
 instance Integral (Exp Int) where
     mod = intOp "%"
@@ -226,9 +226,7 @@ instance Semigroup (Exp String) where
 instance Monoid (Exp String) where
     mempty = fromString ""
     mappend = (<>)
-    mconcat xs = do
-        xs <- sequence xs
-        return $ Value $ f $ concatMap fromValue xs
+    mconcat xs = Value . f . concatMap fromValue <$> sequence xs
         where
             f (Literal "":xs) = f xs
             f (Literal x:Literal y:zs) = f $ Literal (x++y) : zs
@@ -300,7 +298,7 @@ addScope name v = Action $
                    if name `elem` map fst now
                    then error $ "Defined twice in one scope, " ++ name
                    else s{scopes=((name,(typeOf (undefined :: t), fromValue v)):now):rest}
-        
+
 
 
 -- | Create a mutable variable a name, which can be modified with '@='.
