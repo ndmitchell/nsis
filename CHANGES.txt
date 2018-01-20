@@ -1,20 +1,20 @@
 Changelog for NSIS
 
-0.3.2
+0.3.2, released 2017-11-24
     Support Semigroup class
-0.3.1
+0.3.1, released 2017-02-21
     #11, add unsafeInject and unsafeInjectGlobal
     #10, add unicode function
-0.3
+0.3, released 2015-06-24
     Make strCheck take a message
     Add a plugin for helping with radio button
     Make constant force an evaluation
     Make section return the section id
     Generalise the type of nsis
     Add a radio button example
-0.2.5
+0.2.5, released 2015-03-17
     Support OName on file
-0.2.4
+0.2.4, released 2014-12-09
     #3, clone the EnvVarUpdate plugin
     Add abort
     Add strCheck function
@@ -26,7 +26,7 @@ Changelog for NSIS
     Remove upper bounds
     #2, add setDetailsPrint
     Add support for parameters to the finish page
-0.2.3
+0.2.3, released 2013-11-04
     Add explicit page events
     #1, add a Win7 taskbar progress plugin module
     Collapse duplicate events into one
@@ -41,17 +41,17 @@ Changelog for NSIS
     Add execWait and execShell
     Add envVar
     Add copyFiles function
-0.2.2
+0.2.2, released 2013-04-16
     Change writeFileLines' to not build up a large buffer
-0.2.1
+0.2.1, released 2013-03-17
     #592, make the License page take a license file
-0.2
+0.2, released 2013-01-14
     Add Applicative instance for Action
     Add str, int and bool functions
-0.1.2
+0.1.2, released 2012-03-25
     Allow transformers-0.3.0.0
-0.1.1
+0.1.1, released 2012-03-04
     Improved documentation
     Remove findOnce, you can use fileExists instead
-0.1
+0.1, released 2012-03-04
     Start of changelog
