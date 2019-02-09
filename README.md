@@ -26,7 +26,7 @@ Using this library we can write:
 
 ## A Simple Example
 
-The [Examples](https://github.com/ndmitchell/nsis/tree/master/Examples) directory contains a number of simple NSIS scripts, several ported from the NSIS distributed examples. As a simple example:
+The [Examples](https://github.com/ndmitchell/nsis/tree/master/test/Examples) directory contains a number of simple NSIS scripts, several ported from the NSIS distributed examples. As a simple example:
 
     import Development.NSIS
 
