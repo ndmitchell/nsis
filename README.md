@@ -1,6 +1,6 @@
 # NSIS Manual [![Hackage version](https://img.shields.io/hackage/v/nsis.svg?label=Hackage)](https://hackage.haskell.org/package/nsis) [![Stackage version](https://www.stackage.org/package/nsis/badge/nightly?label=Stackage)](https://www.stackage.org/package/nsis) [![Build Status](https://img.shields.io/travis/ndmitchell/nsis/master.svg)](https://travis-ci.org/ndmitchell/nsis)
 
-This library makes it easier to write [NSIS Windows Installers](http://nsis.sourceforge.net/). You should use this library if:
+This library makes it easier to write [NSIS Windows Installers](https://nsis.sourceforge.net/). You should use this library if:
 
 * You want to write a Windows Installer, and have picked NSIS (which is a common choice, and in my opinion, one of the best installer generators for Windows).
 
@@ -43,7 +43,7 @@ The [Examples](https://github.com/ndmitchell/nsis/tree/master/test/Examples) dir
              setOutPath "$INSTDIR"        -- Where to install files in this section
              file [] "Example1.hs"        -- File to put into this section
 
-Running this code will generate a file `example1.nsi` that can be processed with `makensis` to produce the installer `example1.exe`. Documentation on each of the functions [is available here](http://hackage.haskell.org/package/nsis/docs/Development-NSIS.html).
+Running this code will generate a file `example1.nsi` that can be processed with `makensis` to produce the installer `example1.exe`. Documentation on each of the functions [is available here](https://hackage.haskell.org/package/nsis/docs/Development-NSIS.html).
 
 ## Contributions welcome
 
