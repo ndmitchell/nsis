@@ -26,7 +26,7 @@ showNSIS xs =
     concat [("Function " ++ show name) : map indent (outs fs body) ++ ["FunctionEnd"] | (name,body) <- funs] ++
     (if null descs then [] else
         ["!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN"] ++
-        map indent ["!insertmacro MUI_DESCRIPTION_TEXT " ++ show i ++ " " ++ show d | (i,d) <- descs] ++
+        [indent $ "!insertmacro MUI_DESCRIPTION_TEXT " ++ show i ++ " " ++ show d | (i,d) <- descs] ++
         ["!insertmacro MUI_FUNCTION_DESCRIPTION_END"])
     where descs = filter (not . null . snd) $ concatMap secDescs $ universeBi xs
           inits = filter (\x -> not (isSection x) && not (isGlobal x)) xs
