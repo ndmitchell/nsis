@@ -43,8 +43,8 @@ newtype Action a = Action (State S a)
 --   The @ty@ argument should be one of 'String', 'Int' or 'Bool'.
 newtype Value ty = Value {fromValue :: Val}
 
-tyString = typeOf (undefined :: String)
-tyInt = typeOf (undefined :: Int)
+tyString = typeRep (Proxy :: Proxy String)
+tyInt = typeRep (Proxy :: Proxy Int)
 
 
 unique :: Action Int
@@ -151,7 +151,7 @@ type Exp ty = Action (Value ty)
 instance forall a . Typeable a => IsString (Exp a) where
     fromString o = do
         scopes <- Action $ gets scopes
-        let rty = typeOf (undefined :: a)
+        let rty = typeRep (Proxy :: Proxy a)
 
         let grab good name = case lookup name $ concat scopes of
                 Nothing -> error $ "Couldn't find variable, $" ++ name ++ ", in " ++ show o
@@ -297,7 +297,7 @@ addScope name v = Action $
     modify $ \s -> let now:rest = scopes s in
                    if name `elem` map fst now
                    then error $ "Defined twice in one scope, " ++ name
-                   else s{scopes=((name,(typeOf (undefined :: t), fromValue v)):now):rest}
+                   else s{scopes=((name,(typeRep (Proxy :: Proxy t), fromValue v)):now):rest}
 
 
 
