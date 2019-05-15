@@ -8,11 +8,11 @@ import Development.NSIS
 -- Based on example1.nsi from NSIS
 --
 -- This script is perhaps one of the simplest NSIs you can make. All of the
--- optional settings are left to their default settings. The installer simply 
+-- optional settings are left to their default settings. The installer simply
 -- prompts the user asking them where to install, and drops a copy of example1.hs
--- there. 
+-- there.
 example1 = do
-    
+
     -- The name of the installer
     name "Example1"
 
@@ -28,7 +28,7 @@ example1 = do
     ---------------------------------
 
     -- Pages
-    
+
     page Directory
     page InstFiles
 

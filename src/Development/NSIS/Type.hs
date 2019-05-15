@@ -153,7 +153,7 @@ data FileMode
     | ModeWrite -- All contents of file are destroyed.
     | ModeAppend -- ^ Opened for both read and write, contents preserved.
      deriving (Data,Typeable,Bounded,Enum,Eq,Ord)
-    
+
 instance Show FileMode where
     show ModeRead = "r"
     show ModeWrite = "w"
@@ -197,7 +197,7 @@ data Compressor = LZMA | ZLIB | BZIP2 deriving (Data,Typeable,Show)
 
 instance Default Compressor where def = ZLIB
 
-data ACompressor = ACompressor 
+data ACompressor = ACompressor
     {compType :: Compressor
     ,compSolid :: Bool
     ,compFinal :: Bool
