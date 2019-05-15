@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+    Add Welcome page
 0.3.2, released 2017-11-24
     Support Semigroup class
 0.3.1, released 2017-02-21

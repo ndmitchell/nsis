@@ -291,7 +291,8 @@ instance Default MessageBoxType where def = MB_ICONINFORMATION
 
 
 data Page
-    = License FilePath
+    = Welcome
+    | License FilePath
     | Components
     | Directory
     | InstFiles
