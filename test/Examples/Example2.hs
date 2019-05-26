@@ -6,7 +6,7 @@ import Development.NSIS
 
 -- Based on example2.nsi from NSIS
 --
--- This script is based on example1.nsi, but it remember the directory, 
+-- This script is based on example1.nsi, but it remember the directory,
 -- has uninstall support and (optionally) installs start menu shortcuts.
 --
 -- It will install example2.nsi into a directory that the user selects,
@@ -25,7 +25,7 @@ example2 = do
     -- The default installation directory
     installDir "$PROGRAMFILES64/Example2"
 
-    -- Registry key to check for directory (so if you install again, it will 
+    -- Registry key to check for directory (so if you install again, it will
     -- overwrite the old one automatically)
     installDirRegKey HKLM "Software/NSIS_Example2" "Install_Dir"
 

@@ -37,7 +37,7 @@ useLabel0 = map (descendBi useLabel0) . f
         f [] = []
 
 
--- Label whose next statement is a good, 
+-- Label whose next statement is a good,
 elimLabeledGoto :: [NSIS] -> [NSIS]
 elimLabeledGoto x = transformBi f x
     where

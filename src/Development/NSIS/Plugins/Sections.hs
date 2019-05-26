@@ -44,4 +44,3 @@ exactlyOneSection xs = do
 
     ensure
     onSelChange ensure
-
