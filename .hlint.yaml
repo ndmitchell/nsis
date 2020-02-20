@@ -21,3 +21,4 @@
 - ignore: {name: "Use upper"}
 - ignore: {name: "Use drop1"}
 - ignore: {name: "Use lastDef"}
+- ignore: {name: "Use zipFrom"}
