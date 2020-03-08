@@ -15,6 +15,7 @@
 - ignore: {name: "Redundant $"}
 - ignore: {name: "Reduce duplication"}
 - ignore: {name: "Use camelCase"}
+- ignore: {name: "Use pure"}
 
 # This package doesn't depend on extra
 - ignore: {name: "Use lower"}
