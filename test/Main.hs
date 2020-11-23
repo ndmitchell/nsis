@@ -49,19 +49,12 @@ main = do
         putStrLn "*****************************************************************"
     names <- return $ if null names then map fst examples else names
 
-    b <- findExecutable "makensis"
-    let build | "--build" `elem` flags = True
-              | "--nobuild" `elem` flags = False
-              | otherwise = isJust b
-
     forM_ names $ \name -> do
         let script = fromMaybe (error $ "Unknown example: " ++ name) $ lookup name examples
         unless ("--nowrite" `elem` flags) $ writeFile (name ++ ".nsi") $ nsis script
-        when build $ do
+        when ("--build" `elem` flags) $ do
             r <- system $ "makensis -V3 " ++ name ++ ".nsi"
             when (r /= ExitSuccess) $ error "NSIS FAILED"
         when ("--run" `elem` flags) $ do
             system $ name ++ ".exe"
             return ()
-    when (isNothing b) $
-        putStrLn "Warning: No nsis on the PATH, files were not built"
