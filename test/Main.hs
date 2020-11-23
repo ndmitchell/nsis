@@ -5,7 +5,6 @@ import Control.Monad
 import Data.List
 import Data.Maybe
 import System.Process
-import System.Directory
 import System.Environment
 import System.Exit
 
