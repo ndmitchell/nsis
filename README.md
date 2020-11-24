@@ -1,4 +1,4 @@
-# NSIS Manual [![Hackage version](https://img.shields.io/hackage/v/nsis.svg?label=Hackage)](https://hackage.haskell.org/package/nsis) [![Stackage version](https://www.stackage.org/package/nsis/badge/nightly?label=Stackage)](https://www.stackage.org/package/nsis) [![Build status](https://img.shields.io/travis/ndmitchell/nsis/master.svg?label=Build)](https://travis-ci.org/ndmitchell/nsis)
+# NSIS Manual [![Hackage version](https://img.shields.io/hackage/v/nsis.svg?label=Hackage)](https://hackage.haskell.org/package/nsis) [![Stackage version](https://www.stackage.org/package/nsis/badge/nightly?label=Stackage)](https://www.stackage.org/package/nsis) [![Build status](https://img.shields.io/github/workflow/status/ndmitchell/nsis/ci.svg)](https://github.com/ndmitchell/nsis/actions)
 
 This library makes it easier to write [NSIS Windows Installers](https://nsis.sourceforge.net/). You should use this library if:
 
