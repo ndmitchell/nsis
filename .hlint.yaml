@@ -17,6 +17,9 @@
 - ignore: {name: "Use camelCase"}
 - ignore: {name: "Use pure"}
 
+# Defines its own &
+- ignore: {name: "Redundant &"}
+
 # This package doesn't depend on extra
 - ignore: {name: "Use lower"}
 - ignore: {name: "Use upper"}
