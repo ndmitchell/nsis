@@ -7,14 +7,14 @@ import Control.Arrow
 import Data.Generics.Uniplate.Data
 import Data.Char
 import Data.Function
-import Data.List
+import Data.List.Extra
 import Data.Maybe
 
 
 showNSIS :: [NSIS] -> [String]
 showNSIS xs =
     ["!Include MUI2.nsh"] ++
-    ["Var _" ++ show v | v <- sort $ nub [i | Var i <- universeBi xs]] ++
+    ["Var _" ++ show v | v <- sortNub [i | Var i <- universeBi xs]] ++
     outs fs (filter isGlobal xs) ++
     ["!insertmacro MUI_LANGUAGE \"English\""] ++
     (if null plugins then [] else
@@ -33,7 +33,7 @@ showNSIS xs =
           fs = map fst funs
           funs = map (fst . head &&& concatMap snd) $ groupBy ((==) `on` fst) $ sortBy (compare `on` fst) $
                      [(Fun ".onInit",inits) | not $ null inits] ++ [(name,body) | Function name body <- universeBi xs]
-          plugins = sort $ nub [a ++ "::" ++ b | Plugin a b _ <- universeBi xs]
+          plugins = sortNub [a ++ "::" ++ b | Plugin a b _ <- universeBi xs]
 
 
 secDescs :: NSIS -> [(SectionId, Val)]
