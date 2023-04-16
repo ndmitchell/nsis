@@ -28,7 +28,7 @@ showNSIS xs =
         ["!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN"] ++
         [indent $ "!insertmacro MUI_DESCRIPTION_TEXT " ++ show i ++ " " ++ show d | (i,d) <- descs] ++
         ["!insertmacro MUI_FUNCTION_DESCRIPTION_END"])
-    where descs = filter (not . null . snd) $ concatMap secDescs $ universeBi xs
+    where descs = concatMap (filter (not . null . snd) . secDescs) $ universeBi xs
           inits = filter (\x -> not (isSection x) && not (isGlobal x)) xs
           fs = map fst funs
           funs = map (fst . head &&& concatMap snd) $ groupBy ((==) `on` fst) $ sortBy (compare `on` fst) $
