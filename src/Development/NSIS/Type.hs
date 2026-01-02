@@ -110,6 +110,7 @@ data NSIS
     | Exec Val
     | ExecWait Val
     | ExecShell AExecShell
+    | ExecShellWait AExecShell
     | ClearErrors
     | Delete ADelete
     | RMDir ARMDir

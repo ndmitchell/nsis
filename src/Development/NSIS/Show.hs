@@ -109,6 +109,7 @@ out fs (MessageBox flags txt lbls) = [unwords $ "MessageBox" : intercalate "|" (
 out fs (Goto x) = ["Goto " ++ show x | x /= Label 0]
 out fs (IntOp a b "~" _) = [unwords $ "IntOp" : [show a, show b, "~"]] -- the only unary IntOp
 out fs (ExecShell AExecShell{..}) = [unwords ["ExecShell","\"\"",show esCommand,show esShow]]
+out fs (ExecShellWait AExecShell{..}) = [unwords ["ExecShellWait","\"\"",show esCommand,show esShow]]
 out fs (Plugin a b cs) = [unwords $ (a ++ "::" ++ b) : map show cs]
 out fs (AddPluginDir a) = [unwords ["!addplugindir",show a]]
 out fs (FindWindow a b c d e) = [unwords $ "FindWindow" : show a : map show ([b,c] ++ maybeToList d ++ maybeToList e)]
