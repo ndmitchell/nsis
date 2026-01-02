@@ -116,6 +116,7 @@ out fs (SendMessage a b c d e f) = [unwords $ "SendMessage" : show a : show b : 
 out fs (Unicode x) = ["Unicode " ++ if x then "true" else "false"]
 out fs (UnsafeInject x) = [x]
 out fs (UnsafeInjectGlobal x) = [x]
+out fs (WriteRegMultiStr k a b c) = [unwords ["WriteRegMultiStr", "/REGEDIT5", show k, show a, show b, show c]]
 
 out fs x = [show x]
 

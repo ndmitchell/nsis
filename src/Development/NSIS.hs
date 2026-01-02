@@ -54,7 +54,7 @@ module Development.NSIS
     getFileTime, fileExists, findEach,
     createDirectory, createShortcut,
     -- ** Registry manipulation
-    readRegStr, deleteRegKey, deleteRegValue, writeRegStr, writeRegExpandStr, writeRegDWORD,
+    readRegStr, deleteRegKey, deleteRegValue, writeRegStr, writeRegExpandStr, writeRegDWORD, writeRegMultiStr,
     -- ** Environment variables
     envVar,
     -- ** Process execution
