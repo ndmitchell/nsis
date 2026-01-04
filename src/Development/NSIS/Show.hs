@@ -54,6 +54,7 @@ isGlobal x = case x of
     Page{} -> True
     Unpage{} -> True
     RequestExecutionLevel{} -> True
+    Target{} -> True
     AddPluginDir{} -> True
     InstallDirRegKey{} -> True
     AllowRootDirInstall{} -> True

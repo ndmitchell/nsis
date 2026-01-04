@@ -70,7 +70,7 @@ module Development.NSIS
     installIcon, uninstallIcon, headerImage,
     installDirRegKey, allowRootDirInstall, caption,
     showInstDetails, showUninstDetails, unicode,
-    requestExecutionLevel,
+    requestExecutionLevel, target,
     -- ** Sections
     SectionId, section, sectionGroup, newSectionId,
     sectionSetText, sectionGetText, sectionSet, sectionGet,
@@ -84,7 +84,7 @@ module Development.NSIS
     -- * Escape hatch
     unsafeInject, unsafeInjectGlobal,
     -- * Settings
-    Compressor(..), HKEY(..), MessageBoxType(..), Attrib(..), Page(..), Level(..), Visibility(..),
+    Compressor(..), HKEY(..), MessageBoxType(..), Attrib(..), Page(..), Level(..), Target(..), Visibility(..),
     FileMode(..), SectionFlag(..), ShowWindow(..), FinishOptions(..), DetailsPrint(..)
     ) where
 

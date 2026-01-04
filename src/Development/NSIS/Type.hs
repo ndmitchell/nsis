@@ -115,6 +115,7 @@ data NSIS
     | RMDir ARMDir
     | CopyFiles ACopyFiles
     | RequestExecutionLevel Level
+    | Target Target
     | AddPluginDir Val
     | InstallDirRegKey HKEY Val Val
     | AllowRootDirInstall Bool
@@ -322,6 +323,14 @@ showPageCtor x = show x
 
 data Level = None | User | Highest | Admin
      deriving (Show,Data,Typeable,Read,Bounded,Enum,Eq,Ord)
+
+data Target = AMD64Unicode | X86ANSI | X86Unicode
+     deriving (Data,Typeable,Read,Bounded,Enum,Eq,Ord)
+
+instance Show Target where
+    show AMD64Unicode = "amd64-unicode"
+    show X86ANSI = "x86-ansi"
+    show X86Unicode = "x86-unicode"
 
 data Visibility = Hide | Show | NeverShow
      deriving (Show,Data,Typeable,Read,Bounded,Enum,Eq,Ord)
