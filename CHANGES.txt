@@ -1,5 +1,6 @@
 Changelog for NSIS
 
+0.3.4, released 2026-01-18
     #17. add support for Target
     #16, add support for WriteRegMultiStr
     #15, add support for ExecShellWait
