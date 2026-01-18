@@ -103,6 +103,7 @@ data NSIS
     | WriteRegStr HKEY Val Val Val
     | WriteRegExpandStr HKEY Val Val Val
     | WriteRegDWORD HKEY Val Val Val
+    | WriteRegMultiStr HKEY Val Val Val
     | ReadRegStr Var HKEY Val Val
     | DeleteRegKey HKEY Val
     | DeleteRegValue HKEY Val Val

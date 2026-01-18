@@ -896,6 +896,9 @@ writeRegExpandStr k = emit3 $ WriteRegExpandStr k
 writeRegDWORD :: HKEY -> Exp String -> Exp String -> Exp Int -> Action ()
 writeRegDWORD k = emit3 $ WriteRegDWORD k
 
+writeRegMultiStr :: HKEY -> Exp String -> Exp String -> Exp String -> Action ()
+writeRegMultiStr k = emit3 $ WriteRegMultiStr k
+
 -- | While the action is executing, do not update the progress bar.
 --   Useful for functions which do a large amount of computation, or have loops.
 hideProgress :: Action a -> Action a
