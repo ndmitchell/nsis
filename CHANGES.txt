@@ -1,5 +1,8 @@
 Changelog for NSIS
 
+    #17. add support for Target
+    #16, add support for WriteRegMultiStr
+    #15, add support for ExecShellWait
 0.3.3, released 2019-05-15
     Add Welcome page
 0.3.2, released 2017-11-24
