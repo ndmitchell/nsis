@@ -822,6 +822,12 @@ execShell sw x = do
     let d = def{esCommand=x}
     emit $ ExecShell $ if null sw then d else d{esShow=last sw}
 
+execShellWait :: [ShowWindow] -> Exp String -> Action ()
+execShellWait sw x = do
+    Value x <- x
+    let d = def{esCommand=x}
+    emit $ ExecShellWait $ if null sw then d else d{esShow=last sw}
+
 sectionSetText :: SectionId -> Exp String -> Action ()
 sectionSetText x = emit1 $ SectionSetText x
 
