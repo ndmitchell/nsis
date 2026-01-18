@@ -4,12 +4,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-} -- Applicative and Monoid required < 7.9
 
 module Development.NSIS.Sugar(
-    Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Target(..), Visibility(..), FileMode(..), SectionFlag(..),
+    Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Type.Target(..), Visibility(..), FileMode(..), SectionFlag(..),
     ShowWindow(..), FinishOptions(..), DetailsPrint(..),
     module Development.NSIS.Sugar, Label, SectionId
     ) where
 
-import Development.NSIS.Type
+import Development.NSIS.Type hiding (Target)
+import qualified Development.NSIS.Type as Type
 import Data.Char
 import Data.List
 import Data.Maybe
@@ -1129,8 +1130,8 @@ unpage = emit . Unpage
 requestExecutionLevel :: Level -> Action ()
 requestExecutionLevel = emit . RequestExecutionLevel
 
-target :: Target -> Action ()
-target = emit . Target
+target :: Type.Target -> Action ()
+target = emit . Type.Target
 
 type HWND = Exp Int
 
