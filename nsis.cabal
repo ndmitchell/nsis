@@ -7,7 +7,7 @@ license-file:       LICENSE
 category:           Development
 author:             Neil Mitchell <ndmitchell@gmail.com>
 maintainer:         Neil Mitchell <ndmitchell@gmail.com>
-copyright:          Neil Mitchell 2012-2023
+copyright:          Neil Mitchell 2012-2026
 synopsis:           DSL for producing Windows Installer using NSIS.
 tested-with:        GHC==9.6, GHC==9.4, GHC==9.2, GHC==9.0, GHC==8.10, GHC==8.8
 description:
