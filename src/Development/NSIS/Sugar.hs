@@ -4,7 +4,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-} -- Applicative and Monoid required < 7.9
 
 module Development.NSIS.Sugar(
-    Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Visibility(..), FileMode(..), SectionFlag(..),
+    Compressor(..), HKEY(..), MessageBoxType(..), Page(..), Level(..), Target(..), Visibility(..), FileMode(..), SectionFlag(..),
     ShowWindow(..), FinishOptions(..), DetailsPrint(..),
     module Development.NSIS.Sugar, Label, SectionId
     ) where
@@ -1125,6 +1125,9 @@ unpage = emit . Unpage
 
 requestExecutionLevel :: Level -> Action ()
 requestExecutionLevel = emit . RequestExecutionLevel
+
+target :: Target -> Action ()
+target = emit . Target
 
 type HWND = Exp Int
 
